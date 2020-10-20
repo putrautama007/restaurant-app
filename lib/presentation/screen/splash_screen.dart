@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
       child: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           if (state is SplashLoadedState) {
-            Future.delayed(Duration(seconds: 2)).then((_) => Navigator.push(
+            Future.delayed(Duration(seconds: 2)).then((_) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomeScreen())));
           }
