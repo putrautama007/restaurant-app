@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
+import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RestaurantCard extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
+  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
 
   RestaurantCard({@required this.restaurantEntity});
 
@@ -26,7 +28,8 @@ class RestaurantCard extends StatelessWidget {
         ],
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () => _restaurantListRouter.goToDetailListRestaurant(
+            context, restaurantEntity),
         child: Row(
           children: [
             ClipRRect(
