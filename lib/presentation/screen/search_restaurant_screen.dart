@@ -48,6 +48,7 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
                         child: Container(
                           height: 20.w,
                           child: TextFormField(
+                            autofocus: true,
                             maxLines: 1,
                             style: TextStyle(color: CustomColors.darkGrey),
                             decoration: InputDecoration(
