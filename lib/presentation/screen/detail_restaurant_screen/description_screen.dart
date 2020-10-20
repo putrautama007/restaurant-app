@@ -8,9 +8,8 @@ class DescriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: EdgeInsets.only(left:16.w,right: 16.w),
+      child: ListView(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
