@@ -7,6 +7,7 @@ import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:restaurant_app/presentation/bloc/restaurant_list_bloc/get_list_restaurant_bloc.dart';
+import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -67,112 +68,7 @@ class HomeScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: state.listRestaurant.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.fromLTRB(8.w, 8.w, 8.w, 0.w),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0.0, 0.5),
-                                  blurRadius: 1.0,
-                                ),
-                              ],
-                            ),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: Image.network(
-                                      state.listRestaurant[index].pictureId,
-                                      height: 90.w,
-                                      width: 125.w,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          16.w, 0.w, 16.w, 0.w),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            state.listRestaurant[index].name,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: CustomColors.darkGrey,
-                                                fontSize: 16.sp),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 8.w),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.pin_drop,
-                                                  color: CustomColors.grey,
-                                                  size: 16.w,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 8.w),
-                                                  child: Text(
-                                                      "${state.listRestaurant[index].city}",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.normal,
-                                                          color: CustomColors.darkGrey,
-                                                          fontSize: 14.sp)),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 8.w),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.star,
-                                                  color: Colors.amber,
-                                                  size: 16.w,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 8.w),
-                                                  child: Text(
-                                                      "${state.listRestaurant[index].rating}",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          color: CustomColors.darkGrey,
-                                                          fontSize: 14.sp)),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
+                          return RestaurantCard(restaurantEntity: state.listRestaurant[index]);
                         })),
               );
             } else {
