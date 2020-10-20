@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/data/local/datasource/local_data_source.dart';
 import 'package:restaurant_app/data/local/repository/restaurant_repository_impl.dart';
+import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
 import 'package:restaurant_app/domain/usecase/get_list_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,8 @@ import 'package:restaurant_app/presentation/bloc/restaurant_list_bloc/get_list_r
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
 
 class HomeScreen extends StatelessWidget {
+  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
+
   @override
   Widget build(BuildContext context) {
     CustomScreenUtils.initScreenUtils(context);
@@ -41,7 +44,8 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () =>
+                  _restaurantListRouter.goToSearchRestaurant(context),
               icon: Icon(
                 Icons.search,
                 color: CustomColors.white,
@@ -68,7 +72,8 @@ class HomeScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         itemCount: state.listRestaurant.length,
                         itemBuilder: (context, index) {
-                          return RestaurantCard(restaurantEntity: state.listRestaurant[index]);
+                          return RestaurantCard(
+                              restaurantEntity: state.listRestaurant[index]);
                         })),
               );
             } else {
