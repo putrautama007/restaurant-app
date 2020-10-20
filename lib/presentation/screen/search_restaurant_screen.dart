@@ -26,7 +26,6 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
         ..add(SearchRestaurant(searchText: "")),
       child: BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(
         builder: (context, state) {
-          print(state.toString());
           if (state is SearchRestaurantLoadedState) {
             return Scaffold(
               appBar: AppBar(
@@ -58,7 +57,6 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
                                 hintText: "Cari restaurant",
                                 hintStyle: TextStyle(color: CustomColors.grey)),
                             onChanged: (value) {
-                              print(value);
                               BlocProvider.of<SearchRestaurantBloc>(context)
                                   .add(SearchRestaurant(
                                       searchText: value.toString()));
