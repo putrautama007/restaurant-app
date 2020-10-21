@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
@@ -13,29 +14,14 @@ class RestaurantRepositoryIml extends RestaurantRepository {
     List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
     var restaurantData = await localDataSource.getRestaurantList();
     restaurantData.restaurants.forEach((restaurant) {
-      List<FoodsEntity> foodList = List<FoodsEntity>();
-      restaurant.menus.foods.forEach((food) {
-        var foodEntity = FoodsEntity(name: food.name);
-        foodList.add(foodEntity);
-      });
-
-      List<DrinksEntity> drinkList = List<DrinksEntity>();
-      restaurant.menus.drinks.forEach((drink) {
-        var drinkEntity = DrinksEntity(name: drink.name);
-        drinkList.add(drinkEntity);
-      });
-
       var restaurantEntity = RestaurantEntity(
           id: restaurant.id,
           name: restaurant.name,
           description: restaurant.description,
-          pictureId: restaurant.pictureId,
+          pictureId: "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
-          rating: restaurant.rating,
-          menus: MenusEntity(
-            foods: foodList,
-            drinks: drinkList,
-          ));
+          rating: restaurant.rating.toString()
+      );
       listRestaurant.add(restaurantEntity);
     });
 
@@ -49,17 +35,6 @@ class RestaurantRepositoryIml extends RestaurantRepository {
     List<RestaurantEntity> filterListRestaurant = List<RestaurantEntity>();
     var restaurantData = await localDataSource.getRestaurantList();
     restaurantData.restaurants.forEach((restaurant) {
-      List<FoodsEntity> foodList = List<FoodsEntity>();
-      restaurant.menus.foods.forEach((food) {
-        var foodEntity = FoodsEntity(name: food.name);
-        foodList.add(foodEntity);
-      });
-
-      List<DrinksEntity> drinkList = List<DrinksEntity>();
-      restaurant.menus.drinks.forEach((drink) {
-        var drinkEntity = DrinksEntity(name: drink.name);
-        drinkList.add(drinkEntity);
-      });
 
       var restaurantEntity = RestaurantEntity(
           id: restaurant.id,
@@ -67,11 +42,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
           description: restaurant.description,
           pictureId: restaurant.pictureId,
           city: restaurant.city,
-          rating: restaurant.rating,
-          menus: MenusEntity(
-            foods: foodList,
-            drinks: drinkList,
-          ));
+          rating: restaurant.rating.toString());
       listRestaurant.add(restaurantEntity);
     });
     filterListRestaurant = listRestaurant
