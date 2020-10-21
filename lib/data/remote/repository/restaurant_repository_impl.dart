@@ -10,7 +10,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   RestaurantRepositoryIml({@required this.localDataSource});
 
   @override
-  Future<List<RestaurantEntity>> getListRestaurant() async {
+  Future<RestaurantListEntity> getListRestaurant() async {
     List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
     var restaurantData = await localDataSource.getRestaurantList();
     restaurantData.restaurants.forEach((restaurant) {
@@ -25,7 +25,13 @@ class RestaurantRepositoryIml extends RestaurantRepository {
       listRestaurant.add(restaurantEntity);
     });
 
-    return listRestaurant;
+    var restaurantListEntity = RestaurantListEntity(
+      error: restaurantData.error,
+      message: restaurantData.message,
+      restaurants: listRestaurant,
+    );
+
+    return restaurantListEntity;
   }
 
   @override

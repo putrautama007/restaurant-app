@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 class RestaurantListEntity extends Equatable {
+  final bool error;
+  final String message;
   final List<RestaurantEntity> restaurants;
 
-  RestaurantListEntity({this.restaurants});
+  RestaurantListEntity({this.restaurants, this.message, this.error});
 
   @override
-  List<Object> get props => [restaurants];
+  List<Object> get props => [restaurants, message, error];
 }
 
 class RestaurantEntity extends Equatable {
