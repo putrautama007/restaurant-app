@@ -73,7 +73,7 @@ class DescriptionScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.only(right: 8.w),
-                    padding: EdgeInsets.fromLTRB(16.w,0.w,16.w,0.w),
+                    padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 0.w),
                     decoration: BoxDecoration(
                       color: CustomColors.yellow,
                       borderRadius: BorderRadius.circular(15.0),
