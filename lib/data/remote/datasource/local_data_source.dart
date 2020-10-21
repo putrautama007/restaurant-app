@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:restaurant_app/data/local/model/restaurant_model.dart';
+import 'package:restaurant_app/data/remote/model/restaurant_model.dart';
 
 abstract class LocalDataSource {
   Future<RestaurantListModel> getRestaurantList();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_app/data/local/datasource/local_data_source.dart';
-import 'package:restaurant_app/data/local/repository/restaurant_repository_impl.dart';
+import 'package:restaurant_app/data/remote/datasource/local_data_source.dart';
+import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
 import 'package:restaurant_app/domain/usecase/serch_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
