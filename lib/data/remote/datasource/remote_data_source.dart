@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:restaurant_app/data/remote/model/restaurant_model.dart';
 
-abstract class LocalDataSource {
+abstract class RemoteDataSource {
   Future<RestaurantListModel> getRestaurantList();
   Future<RestaurantListModel> getRestaurantListByName();
 }
 
-class LocalDataSourceImpl extends LocalDataSource {
+class RemoteDataSourceImpl extends RemoteDataSource {
   @override
   Future<RestaurantListModel> getRestaurantList() async {
     return await rootBundle

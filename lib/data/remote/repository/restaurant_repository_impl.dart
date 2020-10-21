@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:restaurant_app/data/remote/datasource/local_data_source.dart';
+import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 
 class RestaurantRepositoryIml extends RestaurantRepository {
-  LocalDataSource localDataSource;
+  RemoteDataSource localDataSource;
 
   RestaurantRepositoryIml({@required this.localDataSource});
 

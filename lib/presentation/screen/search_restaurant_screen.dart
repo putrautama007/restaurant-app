@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_app/data/remote/datasource/local_data_source.dart';
+import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
 import 'package:restaurant_app/domain/usecase/serch_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
@@ -22,7 +22,7 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
       create: (context) => SearchRestaurantBloc(
           searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: LocalDataSourceImpl())))
+                  localDataSource: RemoteDataSourceImpl())))
         ..add(SearchRestaurant(searchText: "")),
       child: BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(
         builder: (context, state) {

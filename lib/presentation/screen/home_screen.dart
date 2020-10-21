@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_app/data/remote/datasource/local_data_source.dart';
+import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
 import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
 import 'package:restaurant_app/domain/usecase/get_list_restaurant_usecase.dart';
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       create: (context) => GetListRestaurantBloc(
           getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: LocalDataSourceImpl())))
+                  localDataSource: RemoteDataSourceImpl())))
         ..add(GetListRestaurant()),
       child: Scaffold(
         backgroundColor: CustomColors.yellow,
