@@ -7,14 +7,14 @@ import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 
 class RestaurantRepositoryIml extends RestaurantRepository {
-  RemoteDataSource localDataSource;
+  RemoteDataSource remoteDataSource;
 
-  RestaurantRepositoryIml({@required this.localDataSource});
+  RestaurantRepositoryIml({@required this.remoteDataSource});
 
   @override
   Future<RestaurantListEntity> getListRestaurant() async {
     List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
-    var restaurantData = await localDataSource.getRestaurantList();
+    var restaurantData = await remoteDataSource.getRestaurantList();
     restaurantData.restaurants.forEach((restaurant) {
       var restaurantEntity = RestaurantEntity(
           id: restaurant.id,
@@ -40,7 +40,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   Future<RestaurantListEntity> searchRestaurant(String restaurantName) async {
     List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
     listRestaurant.clear();
-    var restaurantData = await localDataSource.searchRestaurant(restaurantName);
+    var restaurantData = await remoteDataSource.searchRestaurant(restaurantName);
     restaurantData.restaurants.forEach((restaurant) {
       var restaurantEntity = RestaurantEntity(
           id: restaurant.id,
@@ -66,7 +66,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   Future<DetailRestaurantEntity> getRestaurantDetail(
       String restaurantId) async {
     var restaurantData =
-        await localDataSource.getRestaurantDetail(restaurantId);
+        await remoteDataSource.getRestaurantDetail(restaurantId);
     List<CategoryEntity> categoryList = List<CategoryEntity>();
     restaurantData.restaurant.categories.forEach((category) {
       var categoryEntity = CategoryEntity(name: category.name);
@@ -120,7 +120,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   Future<AddReviewsEntity> addReview(
       String restaurantId, String userName, String review) async {
     var consumerReview =
-        await localDataSource.addReview(restaurantId, userName, review);
+        await remoteDataSource.addReview(restaurantId, userName, review);
     var consumerReviewEntity = AddReviewsEntity(
         error: consumerReview.error, message: consumerReview.message);
 

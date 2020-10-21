@@ -26,7 +26,7 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
       create: (context) => SearchRestaurantBloc(
           searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: RemoteDataSourceImpl(
+                  remoteDataSource: RemoteDataSourceImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
         ..add(SearchRestaurant(searchText: "")),
       child: Scaffold(

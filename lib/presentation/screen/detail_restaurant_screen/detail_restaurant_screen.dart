@@ -45,7 +45,7 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
       create: (context) => GetDetailRestaurantBloc(
           getRestaurantDetailUseCase: GetRestaurantDetailUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: RemoteDataSourceImpl(
+                  remoteDataSource: RemoteDataSourceImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
         ..add(GetDetailRestaurant(restaurantId: widget.restaurantId)),
       child: DefaultTabController(

@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       create: (context) => GetListRestaurantBloc(
           getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: RemoteDataSourceImpl(
+                  remoteDataSource: RemoteDataSourceImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
         ..add(GetListRestaurant()),
       child: Scaffold(
