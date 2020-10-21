@@ -28,7 +28,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
 
     var restaurantListEntity = RestaurantListEntity(
       error: restaurantData.error,
-      message: restaurantData.message,
+      message: restaurantData.message ?? "",
       restaurants: listRestaurant,
     );
 
