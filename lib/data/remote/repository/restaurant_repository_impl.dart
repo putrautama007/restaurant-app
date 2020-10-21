@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
+import 'package:restaurant_app/domain/entity/add_review_entity.dart';
 import 'package:restaurant_app/domain/entity/detail_restaurant_entity.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
@@ -36,8 +37,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   }
 
   @override
-  Future<RestaurantListEntity> searchRestaurant(
-      String restaurantName) async {
+  Future<RestaurantListEntity> searchRestaurant(String restaurantName) async {
     List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
     listRestaurant.clear();
     var restaurantData = await localDataSource.searchRestaurant(restaurantName);
@@ -47,7 +47,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
           name: restaurant.name,
           description: restaurant.description,
           pictureId:
-          "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
+              "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
           rating: restaurant.rating.toString());
       listRestaurant.add(restaurantEntity);
@@ -114,5 +114,16 @@ class RestaurantRepositoryIml extends RestaurantRepository {
       consumerReviews: consumerReviewList,
     );
     return detailRestaurantEntity;
+  }
+
+  @override
+  Future<AddReviewsEntity> addReview(
+      String restaurantId, String userName, String review) async {
+    var consumerReview =
+        await localDataSource.addReview(restaurantId, userName, review);
+    var consumerReviewEntity = AddReviewsEntity(
+        error: consumerReview.error, message: consumerReview.message);
+
+    return consumerReviewEntity;
   }
 }

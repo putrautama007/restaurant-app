@@ -10,6 +10,8 @@ import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/presentation/bloc/detail_restaurant_bloc/get_detail_restaurant_bloc.dart';
+import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
+import 'package:restaurant_app/presentation/widget/button/custom_button.dart';
 
 part 'description_screen.dart';
 
@@ -19,11 +21,16 @@ part 'drinks_screen.dart';
 
 part 'reviews_screen.dart';
 
-class DetailRestaurantScreen extends StatelessWidget {
+class DetailRestaurantScreen extends StatefulWidget {
   final String restaurantId;
 
   DetailRestaurantScreen({@required this.restaurantId});
 
+  @override
+  _DetailRestaurantScreenState createState() => _DetailRestaurantScreenState();
+}
+
+class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
   @override
   Widget build(BuildContext context) {
     CustomScreenUtils.initScreenUtils(context);
@@ -33,7 +40,7 @@ class DetailRestaurantScreen extends StatelessWidget {
               restaurantRepository: RestaurantRepositoryIml(
                   localDataSource: RemoteDataSourceImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
-        ..add(GetDetailRestaurant(restaurantId: restaurantId)),
+        ..add(GetDetailRestaurant(restaurantId: widget.restaurantId)),
       child: DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -95,7 +102,10 @@ class DetailRestaurantScreen extends StatelessWidget {
                     DrinksScreen(
                       drinks: state.detailRestaurant.menus.drinks,
                     ),
-                    ReviewsScreen(consumerReviews: state.detailRestaurant.consumerReviews,)
+                    ReviewsScreen(
+                      consumerReviews: state.detailRestaurant.consumerReviews,
+                      restaurantId: state.detailRestaurant.id,
+                    )
                   ],
                 ),
               );
