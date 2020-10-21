@@ -80,6 +80,7 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                         fontSize: 20.sp),
                   ),
                   bottom: TabBar(
+                    isScrollable: true,
                     labelColor: CustomColors.white,
                     indicatorColor: CustomColors.lightYellow,
                     labelStyle: TextStyle(
