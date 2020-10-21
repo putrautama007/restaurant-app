@@ -29,16 +29,22 @@ class RestaurantCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () => _restaurantListRouter.goToDetailListRestaurant(
-            context, restaurantEntity.id),
+            context, restaurantEntity.id,restaurantEntity.name,restaurantEntity.pictureId),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15.0),
-              child: Image.network(
-                restaurantEntity.pictureId,
-                height: 90.w,
-                width: 125.w,
-                fit: BoxFit.cover,
+            Hero(
+              tag: restaurantEntity.name,
+              child: Material(
+                color: Colors.transparent,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: Image.network(
+                    restaurantEntity.pictureId,
+                    height: 90.w,
+                    width: 125.w,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             Expanded(

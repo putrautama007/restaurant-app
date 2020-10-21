@@ -25,8 +25,13 @@ part 'reviews_screen.dart';
 
 class DetailRestaurantScreen extends StatefulWidget {
   final String restaurantId;
+  final String restaurantName;
+  final String restaurantImage;
 
-  DetailRestaurantScreen({@required this.restaurantId});
+  DetailRestaurantScreen(
+      {@required this.restaurantId,
+      @required this.restaurantName,
+      @required this.restaurantImage});
 
   @override
   _DetailRestaurantScreenState createState() => _DetailRestaurantScreenState();
@@ -46,56 +51,63 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
       child: DefaultTabController(
         length: 4,
         child: Scaffold(
-          body: BlocBuilder<GetDetailRestaurantBloc, GetDetailRestaurantState>(
-              builder: (context, state) {
-            if (state is GetDetailRestaurantLoadedState) {
-              return NestedScrollView(
-                headerSliverBuilder: (context, isScrolled) {
-                  return [
-                    SliverAppBar(
-                      backgroundColor: CustomColors.yellow,
-                      pinned: true,
-                      expandedHeight: 200.w,
-                      iconTheme: IconThemeData(color: CustomColors.white),
-                      flexibleSpace: FlexibleSpaceBar(
-                        background: Image.network(
-                          state.detailRestaurant.pictureId,
+          body: NestedScrollView(
+            headerSliverBuilder: (context, isScrolled) {
+              return [
+                SliverAppBar(
+                  backgroundColor: CustomColors.yellow,
+                  pinned: true,
+                  expandedHeight: 200.w,
+                  iconTheme: IconThemeData(color: CustomColors.white),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Hero(
+                      tag: widget.restaurantName,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: Image.network(
+                          widget.restaurantImage,
                           fit: BoxFit.fitWidth,
                         ),
                       ),
-                      centerTitle: false,
-                      title: Text(
-                        state.detailRestaurant.name,
-                        style: TextStyle(
-                            color: CustomColors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.sp),
-                      ),
-                      bottom: TabBar(
-                        labelColor: CustomColors.white,
-                        indicatorColor: CustomColors.lightYellow,
-                        labelStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                        tabs: [
-                          Tab(
-                            text: "Description",
-                          ),
-                          Tab(
-                            text: "Foods",
-                          ),
-                          Tab(
-                            text: "Drinks",
-                          ),
-                          Tab(
-                            text: "Reviews",
-                          ),
-                        ],
-                      ),
                     ),
-                  ];
-                },
-                body: TabBarView(
+                  ),
+                  centerTitle: false,
+                  title: Text(
+                    widget.restaurantName,
+                    style: TextStyle(
+                        color: CustomColors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.sp),
+                  ),
+                  bottom: TabBar(
+                    labelColor: CustomColors.white,
+                    indicatorColor: CustomColors.lightYellow,
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    tabs: [
+                      Tab(
+                        text: "Description",
+                      ),
+                      Tab(
+                        text: "Foods",
+                      ),
+                      Tab(
+                        text: "Drinks",
+                      ),
+                      Tab(
+                        text: "Reviews",
+                      ),
+                    ],
+                  ),
+                ),
+              ];
+            },
+            body:
+                BlocBuilder<GetDetailRestaurantBloc, GetDetailRestaurantState>(
+                    builder: (context, state) {
+              if (state is GetDetailRestaurantLoadedState) {
+                return TabBarView(
                   children: [
                     DescriptionScreen(restaurantEntity: state.detailRestaurant),
                     FoodsScreen(
@@ -109,22 +121,20 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                       restaurantId: state.detailRestaurant.id,
                     )
                   ],
-                ),
-              );
-            }
-            else if(state is GetDetailRestaurantFailedState){
-              return Scaffold(
-                appBar: AppBar(
-                  backgroundColor: CustomColors.yellow,
-                  iconTheme: IconThemeData(color: CustomColors.white),
-                ),
-                body: CustomErrorWidget(),
-              );
-            }
-            else {
-              return CustomLoadingProgress();
-            }
-          }),
+                );
+              } else if (state is GetDetailRestaurantFailedState) {
+                return Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: CustomColors.yellow,
+                    iconTheme: IconThemeData(color: CustomColors.white),
+                  ),
+                  body: CustomErrorWidget(),
+                );
+              } else {
+                return CustomLoadingProgress();
+              }
+            }),
+          ),
         ),
       ),
     );
