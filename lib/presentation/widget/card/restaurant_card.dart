@@ -29,7 +29,7 @@ class RestaurantCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () => _restaurantListRouter.goToDetailListRestaurant(
-            context, restaurantEntity),
+            context, restaurantEntity.id),
         child: Row(
           children: [
             ClipRRect(
