@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
 import 'package:restaurant_app/domain/usecase/serch_restaurant_usecase.dart';
@@ -22,58 +24,61 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
       create: (context) => SearchRestaurantBloc(
           searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: RemoteDataSourceImpl())))
+                  localDataSource: RemoteDataSourceImpl(
+                      dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
         ..add(SearchRestaurant(searchText: "")),
-      child: BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(
-        builder: (context, state) {
-          if (state is SearchRestaurantLoadedState) {
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: CustomColors.yellow,
-                elevation: 0.0,
-                iconTheme: IconThemeData(color: CustomColors.white),
-                title: Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.search,
-                          color: CustomColors.darkGrey,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 20.w,
-                          child: TextFormField(
-                            autofocus: true,
-                            maxLines: 1,
-                            style: TextStyle(color: CustomColors.darkGrey),
-                            decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(8.w, 15.w, 8.w, 5.w),
-                                border: InputBorder.none,
-                                hintText: "Cari restaurant",
-                                hintStyle: TextStyle(color: CustomColors.grey)),
-                            onChanged: (value) {
-                              BlocProvider.of<SearchRestaurantBloc>(context)
-                                  .add(SearchRestaurant(
-                                      searchText: value.toString()));
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: CustomColors.white,
+      child: Scaffold(
+        appBar: AppBar(
+        backgroundColor: CustomColors.yellow,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: CustomColors.white),
+        title: BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(builder: (context, state){
+          return Container(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.search,
+                    color: CustomColors.darkGrey,
                   ),
                 ),
-              ),
-              body: Container(
+                Expanded(
+                  child: Container(
+                    height: 20.w,
+                    child: TextFormField(
+                      autofocus: true,
+                      maxLines: 1,
+                      style: TextStyle(color: CustomColors.darkGrey),
+                      decoration: InputDecoration(
+                          contentPadding:
+                          EdgeInsets.fromLTRB(8.w, 15.w, 8.w, 5.w),
+                          border: InputBorder.none,
+                          hintText: "Cari restaurant",
+                          hintStyle: TextStyle(color: CustomColors.grey)),
+                      onChanged: (value) {
+                        BlocProvider.of<SearchRestaurantBloc>(context)
+                            .add(SearchRestaurant(
+                            searchText: value.toString()));
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: CustomColors.white,
+            ),
+          );
+        }),
+      ),
+        body:  BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(
+          builder: (context, state) {
+            if (state is SearchRestaurantLoadedState) {
+              return Container(
                 padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 0.w),
                 decoration: BoxDecoration(
                   color: CustomColors.lightYellow,
@@ -90,15 +95,16 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
                         restaurantEntity: state.listRestaurant[index]);
                   },
                 ),
-              ),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
+      )
+
     );
   }
 }

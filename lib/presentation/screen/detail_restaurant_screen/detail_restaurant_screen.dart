@@ -40,7 +40,6 @@ class DetailRestaurantScreen extends StatelessWidget {
           body: BlocBuilder<GetDetailRestaurantBloc, GetDetailRestaurantState>(
               builder: (context, state) {
             if (state is GetDetailRestaurantLoadedState) {
-              print(state.detailRestaurant.consumerReviews.toString());
               return NestedScrollView(
                 headerSliverBuilder: (context, isScrolled) {
                   return [

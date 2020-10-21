@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/model/detail_restaurant_model.dart';
 import 'package:restaurant_app/data/remote/model/list_restaurant_model.dart';
@@ -9,7 +6,7 @@ import 'package:restaurant_app/data/remote/model/list_restaurant_model.dart';
 abstract class RemoteDataSource {
   Future<RestaurantListModel> getRestaurantList();
   Future<DetailRestaurantModel> getRestaurantDetail(String restaurantId);
-  Future<RestaurantListModel> getRestaurantListByName();
+  Future<RestaurantListModel> searchRestaurant(String restaurantName);
 }
 
 class RemoteDataSourceImpl extends RemoteDataSource {
@@ -28,11 +25,13 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   }
 
   @override
-  Future<RestaurantListModel> getRestaurantListByName() async{
-    return await rootBundle
-        .loadString('assets/data/local_restaurant.json')
-        .then((localRestaurant) =>
-        RestaurantListModel.fromJson(jsonDecode(localRestaurant)));
+  Future<RestaurantListModel> searchRestaurant(String restaurantName) async{
+    try{
+      Response _response = await dio.get("${ApiConstant.searchRestaurant}$restaurantName");
+      return RestaurantListModel.fromJson(_response.data);
+    }on DioError catch (e){
+      return RestaurantListModel.fromJson(e.response.data);
+    }
   }
 
   @override

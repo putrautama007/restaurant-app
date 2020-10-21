@@ -36,26 +36,30 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   }
 
   @override
-  Future<List<RestaurantEntity>> getListRestaurantByName(
+  Future<RestaurantListEntity> searchRestaurant(
       String restaurantName) async {
     List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
-    List<RestaurantEntity> filterListRestaurant = List<RestaurantEntity>();
-    var restaurantData = await localDataSource.getRestaurantList();
+    listRestaurant.clear();
+    var restaurantData = await localDataSource.searchRestaurant(restaurantName);
     restaurantData.restaurants.forEach((restaurant) {
       var restaurantEntity = RestaurantEntity(
           id: restaurant.id,
           name: restaurant.name,
           description: restaurant.description,
-          pictureId: restaurant.pictureId,
+          pictureId:
+          "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
           rating: restaurant.rating.toString());
       listRestaurant.add(restaurantEntity);
     });
-    filterListRestaurant = listRestaurant
-        .where((food) =>
-            food.name.toLowerCase().contains(restaurantName.toLowerCase()))
-        .toList();
-    return filterListRestaurant;
+
+    var restaurantListEntity = RestaurantListEntity(
+      error: restaurantData.error,
+      message: restaurantData.message ?? "",
+      restaurants: listRestaurant,
+    );
+
+    return restaurantListEntity;
   }
 
   @override
