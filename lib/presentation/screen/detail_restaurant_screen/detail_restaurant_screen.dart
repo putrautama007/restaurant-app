@@ -12,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/presentation/bloc/detail_restaurant_bloc/get_detail_restaurant_bloc.dart';
 import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
 import 'package:restaurant_app/presentation/widget/button/custom_button.dart';
+import 'package:restaurant_app/presentation/widget/info/custom_error_widget.dart';
+import 'package:restaurant_app/presentation/widget/loading/custom_loading_progress.dart';
 
 part 'description_screen.dart';
 
@@ -109,10 +111,18 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                   ],
                 ),
               );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
+            }
+            else if(state is GetDetailRestaurantFailedState){
+              return Scaffold(
+                appBar: AppBar(
+                  backgroundColor: CustomColors.yellow,
+                  iconTheme: IconThemeData(color: CustomColors.white),
+                ),
+                body: CustomErrorWidget(),
               );
+            }
+            else {
+              return CustomLoadingProgress();
             }
           }),
         ),

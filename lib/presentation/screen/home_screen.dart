@@ -11,6 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:restaurant_app/presentation/bloc/restaurant_list_bloc/get_list_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
+import 'package:restaurant_app/presentation/widget/info/custom_error_widget.dart';
+import 'package:restaurant_app/presentation/widget/loading/custom_loading_progress.dart';
 
 class HomeScreen extends StatelessWidget {
   final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
@@ -22,7 +24,8 @@ class HomeScreen extends StatelessWidget {
       create: (context) => GetListRestaurantBloc(
           getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: RemoteDataSourceImpl(dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
+                  localDataSource: RemoteDataSourceImpl(
+                      dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
         ..add(GetListRestaurant()),
       child: Scaffold(
         backgroundColor: CustomColors.yellow,
@@ -78,6 +81,18 @@ class HomeScreen extends StatelessWidget {
                               restaurantEntity: state.listRestaurant[index]);
                         })),
               );
+            } else if (state is GetListRestaurantFailedState) {
+              return Container(
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  color: CustomColors.lightYellow,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0),
+                  ),
+                ),
+                child: CustomErrorWidget(),
+              );
             } else {
               return Container(
                 padding: EdgeInsets.all(16.w),
@@ -88,9 +103,7 @@ class HomeScreen extends StatelessWidget {
                     topRight: Radius.circular(40.0),
                   ),
                 ),
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+                child: CustomLoadingProgress(),
               );
             }
           },
