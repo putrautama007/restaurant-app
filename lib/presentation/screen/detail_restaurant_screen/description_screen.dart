@@ -7,7 +7,8 @@ class DescriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: CustomColors.lightYellow,
       padding: EdgeInsets.only(left:16.w,right: 16.w),
       child: ListView(
         children: [

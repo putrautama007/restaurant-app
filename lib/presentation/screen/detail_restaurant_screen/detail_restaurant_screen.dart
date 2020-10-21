@@ -44,6 +44,7 @@ class DetailRestaurantScreen extends StatelessWidget {
                 headerSliverBuilder: (context, isScrolled) {
                   return [
                     SliverAppBar(
+                      backgroundColor: CustomColors.yellow,
                       pinned: true,
                       expandedHeight: 200.w,
                       iconTheme: IconThemeData(color: CustomColors.white),
