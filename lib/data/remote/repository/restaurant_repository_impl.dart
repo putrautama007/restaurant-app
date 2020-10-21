@@ -102,7 +102,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
       name: restaurantData.restaurant.name,
       description: restaurantData.restaurant.description,
       pictureId:
-          "${ApiConstant.mediumImageResolution}${restaurantData.restaurant.pictureId}",
+          "${ApiConstant.smallImageResolution}${restaurantData.restaurant.pictureId}",
       city: restaurantData.restaurant.city,
       address: restaurantData.restaurant.address,
       rating: restaurantData.restaurant.rating.toString(),
