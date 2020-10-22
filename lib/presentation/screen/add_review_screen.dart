@@ -109,11 +109,11 @@ class AddReviewScreen extends StatelessWidget {
   }
 
   void errorMessage(context, String message) {
-    final snackBar = SnackBar(
+    final _snackBar = SnackBar(
       duration: const Duration(seconds: 1),
       backgroundColor: CustomColors.yellow,
       content: Text(message, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp),),
     );
-    Scaffold.of(context).showSnackBar(snackBar);
+    Scaffold.of(context).showSnackBar(_snackBar);
   }
 }

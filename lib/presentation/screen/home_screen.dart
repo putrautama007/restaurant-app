@@ -22,11 +22,18 @@ class HomeScreen extends StatelessWidget {
     CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
       create: (context) => GetListRestaurantBloc(
-          getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
-              restaurantRepository: RestaurantRepositoryIml(
-                  remoteDataSource: RemoteDataSourceImpl(
-                      dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl))))))
-        ..add(GetListRestaurant()),
+        getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
+          restaurantRepository: RestaurantRepositoryIml(
+            remoteDataSource: RemoteDataSourceImpl(
+              dio: Dio(
+                BaseOptions(
+                  baseUrl: ApiConstant.baseUrl,
+                ),
+              ),
+            ),
+          ),
+        ),
+      )..add(GetListRestaurant()),
       child: Scaffold(
         backgroundColor: CustomColors.yellow,
         appBar: AppBar(

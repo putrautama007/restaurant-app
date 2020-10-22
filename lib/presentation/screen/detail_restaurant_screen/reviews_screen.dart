@@ -1,17 +1,11 @@
 part of 'detail_restaurant_screen.dart';
 
-class ReviewsScreen extends StatefulWidget {
+class ReviewsScreen extends StatelessWidget {
   final List<ConsumerReviewEntity> consumerReviews;
   final String restaurantId;
+  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
 
   ReviewsScreen({this.consumerReviews, this.restaurantId});
-
-  @override
-  _ReviewsScreenState createState() => _ReviewsScreenState();
-}
-
-class _ReviewsScreenState extends State<ReviewsScreen> {
-  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +16,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           Container(
             margin: EdgeInsets.only(bottom: 32.w),
             child: ListView.builder(
-                itemCount: widget.consumerReviews.length,
+                itemCount: consumerReviews.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Container(
@@ -42,17 +36,17 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.consumerReviews[index].name,
+                        Text(consumerReviews[index].name,
                             style: TextStyle(
                                 fontSize: 20.sp,
                                 color: CustomColors.darkGrey,
                                 fontWeight: FontWeight.bold)),
-                        Text(widget.consumerReviews[index].review,
+                        Text(consumerReviews[index].review,
                             style: TextStyle(
                                 fontSize: 16.sp,
                                 color: CustomColors.darkGrey,
                                 fontWeight: FontWeight.normal)),
-                        Text(widget.consumerReviews[index].date,
+                        Text(consumerReviews[index].date,
                             style: TextStyle(
                                 fontSize: 14.sp,
                                 color: CustomColors.grey,
@@ -66,8 +60,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
             alignment: Alignment.bottomCenter,
             child: CustomButton(
               text: "Add Review",
-              onTap: () =>
-                  _restaurantListRouter.goToAddReview(context, widget.restaurantId),
+              onTap: () => _restaurantListRouter.goToAddReview(
+                  context, restaurantId),
             ),
           ),
         ],

@@ -110,7 +110,9 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
               if (state is GetDetailRestaurantLoadedState) {
                 return TabBarView(
                   children: [
-                    DescriptionScreen(restaurantEntity: state.detailRestaurant),
+                    DescriptionScreen(
+                      restaurantEntity: state.detailRestaurant,
+                    ),
                     FoodsScreen(
                       foods: state.detailRestaurant.menus.foods,
                     ),
