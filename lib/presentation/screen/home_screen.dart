@@ -9,6 +9,7 @@ import 'package:restaurant_app/domain/usecase/get_list_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
+import 'package:restaurant_app/external/image_strings.dart';
 import 'package:restaurant_app/presentation/bloc/restaurant_list_bloc/get_list_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
 import 'package:restaurant_app/presentation/widget/info/custom_error_widget.dart';
@@ -68,26 +69,43 @@ class HomeScreen extends StatelessWidget {
         body: BlocBuilder<GetListRestaurantBloc, GetListRestaurantState>(
           builder: (context, state) {
             if (state is GetListRestaurantLoadedState) {
-              return SingleChildScrollView(
-                child: Container(
-                    margin: EdgeInsets.only(top: 16.w),
-                    padding: EdgeInsets.all(16.w),
-                    decoration: BoxDecoration(
-                      color: CustomColors.lightYellow,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40.0),
-                        topRight: Radius.circular(40.0),
-                      ),
+              if (state.listRestaurant.isEmpty) {
+                return Container(
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
+                    color: CustomColors.lightYellow,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
                     ),
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: state.listRestaurant.length,
-                        itemBuilder: (context, index) {
-                          return RestaurantCard(
-                              restaurantEntity: state.listRestaurant[index]);
-                        })),
-              );
+                  ),
+                  child: CustomErrorWidget(
+                    errorImage: ImageStrings.empty,
+                    errorMessage: "Restaurant data is empty",
+                  ),
+                );
+              } else {
+                return SingleChildScrollView(
+                  child: Container(
+                      margin: EdgeInsets.only(top: 16.w),
+                      padding: EdgeInsets.all(16.w),
+                      decoration: BoxDecoration(
+                        color: CustomColors.lightYellow,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40.0),
+                          topRight: Radius.circular(40.0),
+                        ),
+                      ),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: state.listRestaurant.length,
+                          itemBuilder: (context, index) {
+                            return RestaurantCard(
+                                restaurantEntity: state.listRestaurant[index]);
+                          })),
+                );
+              }
             } else if (state is GetListRestaurantFailedState) {
               return Container(
                 padding: EdgeInsets.all(16.w),
@@ -98,7 +116,10 @@ class HomeScreen extends StatelessWidget {
                     topRight: Radius.circular(40.0),
                   ),
                 ),
-                child: CustomErrorWidget(),
+                child: CustomErrorWidget(
+                  errorImage: ImageStrings.error,
+                  errorMessage: "An error occurred please try again later",
+                ),
               );
             } else {
               return Container(

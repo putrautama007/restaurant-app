@@ -9,6 +9,7 @@ import 'package:restaurant_app/domain/usecase/get_restaurant_detail_usecase.dart
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:restaurant_app/external/image_strings.dart';
 import 'package:restaurant_app/presentation/bloc/detail_restaurant_bloc/get_detail_restaurant_bloc.dart';
 import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
 import 'package:restaurant_app/presentation/widget/button/custom_button.dart';
@@ -131,7 +132,10 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                     backgroundColor: CustomColors.yellow,
                     iconTheme: IconThemeData(color: CustomColors.white),
                   ),
-                  body: CustomErrorWidget(),
+                  body: CustomErrorWidget(
+                    errorImage: ImageStrings.error,
+                    errorMessage: "An error occurred please try again later",
+                  ),
                 );
               } else {
                 return CustomLoadingProgress();

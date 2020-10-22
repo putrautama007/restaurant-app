@@ -8,6 +8,7 @@ import 'package:restaurant_app/domain/usecase/serch_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
+import 'package:restaurant_app/external/image_strings.dart';
 import 'package:restaurant_app/presentation/bloc/search_restaurant_bloc/search_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
 import 'package:restaurant_app/presentation/widget/info/custom_error_widget.dart';
@@ -87,26 +88,36 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
           body: BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(
             builder: (context, state) {
               if (state is SearchRestaurantLoadedState) {
-                return Container(
-                  padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 0.w),
-                  decoration: BoxDecoration(
-                    color: CustomColors.lightYellow,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.0),
-                      topRight: Radius.circular(40.0),
+                if (state.listRestaurant.isEmpty) {
+                  return CustomErrorWidget(
+                    errorImage: ImageStrings.empty,
+                    errorMessage: "Restaurant not found",
+                  );
+                } else {
+                  return Container(
+                    padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 0.w),
+                    decoration: BoxDecoration(
+                      color: CustomColors.lightYellow,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40.0),
+                        topRight: Radius.circular(40.0),
+                      ),
                     ),
-                  ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.listRestaurant.length,
-                    itemBuilder: (context, index) {
-                      return RestaurantCard(
-                          restaurantEntity: state.listRestaurant[index]);
-                    },
-                  ),
-                );
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.listRestaurant.length,
+                      itemBuilder: (context, index) {
+                        return RestaurantCard(
+                            restaurantEntity: state.listRestaurant[index]);
+                      },
+                    ),
+                  );
+                }
               } else if (state is SearchRestaurantFailedState) {
-                return CustomErrorWidget();
+                return CustomErrorWidget(
+                  errorImage: ImageStrings.error,
+                  errorMessage: "An error occurred please try again later",
+                );
               } else {
                 return CustomLoadingProgress();
               }
