@@ -1,40 +1,33 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
-import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
-import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
-import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
-import 'package:restaurant_app/domain/usecase/get_list_restaurant_usecase.dart';
+import 'package:restaurant_app/data/local/datasource/local_data_source.dart';
+import 'package:restaurant_app/data/local/model/restaurant_table.dart';
+import 'package:restaurant_app/data/local/repository/local_restaurant_repository_impl.dart';
+import 'package:restaurant_app/domain/usecase/favorite_resaturant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/image_strings.dart';
-import 'package:restaurant_app/presentation/bloc/restaurant_list_bloc/get_list_restaurant_bloc.dart';
+import 'package:restaurant_app/presentation/bloc/favorite_restaurant_bloc/favorite_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
 import 'package:restaurant_app/presentation/widget/info/custom_error_widget.dart';
 import 'package:restaurant_app/presentation/widget/loading/custom_loading_progress.dart';
 
-class RestaurantListScreen extends StatelessWidget {
-  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
+class FavoriteRestaurantListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
-      create: (context) => GetListRestaurantBloc(
-        getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
-          restaurantRepository: RestaurantRepositoryIml(
-            remoteDataSource: RemoteDataSourceImpl(
-              dio: Dio(
-                BaseOptions(
-                  baseUrl: ApiConstant.baseUrl,
-                ),
-              ),
+      create: (context) => FavoriteRestaurantBloc(
+        favoriteRestaurantUseCase: FavoriteRestaurantUseCaseImpl(
+          localRestaurantRepository: LocalRestaurantRepositoryImpl(
+            localDataSource: LocalDataSourceImpl(
+              appDatabase: AppDatabase(),
             ),
           ),
         ),
-      )..add(GetListRestaurant()),
+      )..add(GetListFavoriteRestaurant()),
       child: Scaffold(
         backgroundColor: CustomColors.yellow,
         appBar: AppBar(
@@ -46,30 +39,21 @@ class RestaurantListScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Restaurant",
+                "Favorite Restaurant",
                 style: TextStyle(color: CustomColors.white, fontSize: 20.sp),
               ),
               Text(
-                "Recommendation restaurant for you!",
+                "Your favorite restaurant list!",
                 style: TextStyle(color: CustomColors.white, fontSize: 12.sp),
               )
             ],
           ),
-          actions: [
-            IconButton(
-              onPressed: () =>
-                  _restaurantListRouter.goToSearchRestaurant(context),
-              icon: Icon(
-                Icons.search,
-                color: CustomColors.white,
-              ),
-            ),
-          ],
         ),
-        body: BlocBuilder<GetListRestaurantBloc, GetListRestaurantState>(
+        body: BlocBuilder<FavoriteRestaurantBloc,
+            FavoriteRestaurantState>(
           builder: (context, state) {
-            if (state is GetListRestaurantLoadedState) {
-              if (state.listRestaurant.isEmpty) {
+            if (state is FavoriteRestaurantSuccessGetListState) {
+              if (state.listRestaurantTableData.isEmpty) {
                 return Container(
                   margin: EdgeInsets.only(top: 16.w),
                   padding: EdgeInsets.all(16.w),
@@ -82,13 +66,22 @@ class RestaurantListScreen extends StatelessWidget {
                   ),
                   child: CustomErrorWidget(
                     errorImage: ImageStrings.empty,
-                    errorMessage: "Restaurant data is empty",
+                    errorMessage: "Favorite restaurant data is empty",
                   ),
                 );
               } else {
-                return SingleChildScrollView(
-                  child: Container(
-                      margin: EdgeInsets.only(top: 16.w),
+                return Container(
+                  margin: EdgeInsets.only(top: 16.w),
+                  height: 1.hp,
+                  decoration: BoxDecoration(
+                    color: CustomColors.lightYellow,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child:Container(
                       padding: EdgeInsets.all(16.w),
                       decoration: BoxDecoration(
                         color: CustomColors.lightYellow,
@@ -100,14 +93,16 @@ class RestaurantListScreen extends StatelessWidget {
                       child: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: state.listRestaurant.length,
+                          itemCount: state.listRestaurantTableData.length,
                           itemBuilder: (context, index) {
                             return RestaurantCard(
-                                restaurantEntity: state.listRestaurant[index]);
-                          })),
+                                restaurantTableData: state.listRestaurantTableData[index]);
+                          }),
+                    ),
+                  ),
                 );
               }
-            } else if (state is GetListRestaurantFailedState) {
+            } else if (state is FavoriteRestaurantFailedState) {
               return Container(
                 margin: EdgeInsets.only(top: 16.w),
                 padding: EdgeInsets.all(16.w),
