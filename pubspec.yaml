@@ -32,6 +32,7 @@ dependencies:
   equatable: ^1.2.5
   flutter_screenutil: ^3.1.1
   dio: ^3.0.10
+  moor_flutter: ^3.1.0
 
 dev_dependencies:
   flutter_test:
