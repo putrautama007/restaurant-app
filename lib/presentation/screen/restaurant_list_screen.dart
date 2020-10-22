@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
-import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
+import 'package:restaurant_app/domain/router/restaurant_router.dart';
 import 'package:restaurant_app/domain/usecase/get_list_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +16,7 @@ import 'package:restaurant_app/presentation/widget/info/custom_error_widget.dart
 import 'package:restaurant_app/presentation/widget/loading/custom_loading_progress.dart';
 
 class RestaurantListScreen extends StatelessWidget {
-  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
+  final RestaurantRouter _restaurantListRouter = RestaurantRouterImpl();
 
   @override
   Widget build(BuildContext context) {

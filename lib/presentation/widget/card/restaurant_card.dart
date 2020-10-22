@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/local/model/restaurant_table.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
-import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
+import 'package:restaurant_app/domain/router/restaurant_router.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class RestaurantCard extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
   final RestaurantTableData restaurantTableData;
-  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
+  final RestaurantRouter _restaurantListRouter = RestaurantRouterImpl();
 
   RestaurantCard({this.restaurantEntity, this.restaurantTableData});
 
@@ -30,13 +30,17 @@ class RestaurantCard extends StatelessWidget {
         ],
       ),
       child: InkWell(
-        onTap: () =>
-            _restaurantListRouter.goToDetailListRestaurant(
+        onTap: () => restaurantEntity != null
+            ? _restaurantListRouter.goToDetailListRestaurant(
                 context,
                 restaurantEntity.id,
                 restaurantEntity.name,
-                restaurantEntity.pictureId) ??
-            {},
+                restaurantEntity.pictureId)
+            : _restaurantListRouter.goToDetailFavoriteRestaurant(
+                context,
+                restaurantTableData.id,
+                restaurantTableData.name,
+                restaurantTableData.pictureId),
         child: Row(
           children: [
             Hero(
