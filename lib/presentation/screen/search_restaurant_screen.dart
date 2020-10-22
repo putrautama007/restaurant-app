@@ -89,9 +89,11 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
             builder: (context, state) {
               if (state is SearchRestaurantLoadedState) {
                 if (state.listRestaurant.isEmpty) {
-                  return CustomErrorWidget(
-                    errorImage: ImageStrings.empty,
-                    errorMessage: "Restaurant not found",
+                  return Center(
+                    child: CustomErrorWidget(
+                      errorImage: ImageStrings.empty,
+                      errorMessage: "Restaurant not found",
+                    ),
                   );
                 } else {
                   return Container(
