@@ -23,7 +23,7 @@ class RestaurantRepositoryImpl extends RestaurantRepository {
           pictureId:
               "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
-          rating: restaurant.rating.toString());
+          rating: restaurant.rating);
       listRestaurant.add(restaurantEntity);
     });
 
@@ -49,7 +49,7 @@ class RestaurantRepositoryImpl extends RestaurantRepository {
           pictureId:
               "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
-          rating: restaurant.rating.toString());
+          rating: restaurant.rating);
       listRestaurant.add(restaurantEntity);
     });
 

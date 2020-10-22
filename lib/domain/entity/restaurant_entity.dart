@@ -19,6 +19,14 @@ class RestaurantListEntity extends Equatable {
     }
     return data;
   }
+
+  factory RestaurantListEntity.fromJson(Map<String, dynamic> json) =>
+      RestaurantListEntity(
+        error: json['error'],
+        message: json['message'] ?? "",
+        restaurants: List<RestaurantEntity>.from(json['restaurants']
+            .map((restaurant) => RestaurantEntity.fromJson(restaurant))),
+      );
 }
 
 class RestaurantEntity extends Equatable {
@@ -46,6 +54,16 @@ class RestaurantEntity extends Equatable {
         city,
         rating,
       ];
+
+  factory RestaurantEntity.fromJson(Map<String, dynamic> json) =>
+      RestaurantEntity(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        pictureId: json['pictureId'],
+        city: json['city'],
+        rating: json['rating'].toString(),
+      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

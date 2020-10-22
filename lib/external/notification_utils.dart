@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:restaurant_app/data/remote/model/list_restaurant_model.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -70,7 +69,7 @@ class NotificationUtils {
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
       (String payload) async {
-        var data = RestaurantListModel.fromJson(json.decode(payload));
+        var data = RestaurantListEntity.fromJson(json.decode(payload));
         var restaurant = data.restaurants[randomIndex];
         CustomNavigator.pushNamed(route, arguments: restaurant);
       },

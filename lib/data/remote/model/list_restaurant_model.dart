@@ -30,7 +30,7 @@ class RestaurantModel extends Equatable {
   final String description;
   final String pictureId;
   final String city;
-  final double rating;
+  final String rating;
 
   RestaurantModel(
       {this.id,
@@ -50,6 +50,6 @@ class RestaurantModel extends Equatable {
         description: json['description'],
         pictureId: json['pictureId'],
         city: json['city'],
-        rating: json['rating'],
+        rating: json['rating'].toString(),
       );
 }
