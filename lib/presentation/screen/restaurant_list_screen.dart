@@ -58,7 +58,7 @@ class RestaurantListScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () =>
-                  _restaurantListRouter.goToSearchRestaurant(context),
+                  _restaurantListRouter.goToSearchRestaurant(),
               icon: Icon(
                 Icons.search,
                 color: CustomColors.white,

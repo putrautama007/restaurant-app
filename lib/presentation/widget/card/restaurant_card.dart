@@ -32,10 +32,7 @@ class RestaurantCard extends StatelessWidget {
       child: InkWell(
         onTap: () => restaurantEntity != null
             ? _restaurantListRouter.goToDetailListRestaurant(
-                context,
-                restaurantEntity.id,
-                restaurantEntity.name,
-                restaurantEntity.pictureId)
+                restaurantEntity)
             : _restaurantListRouter.goToDetailFavoriteRestaurant(
                 context,
                 restaurantTableData.id,

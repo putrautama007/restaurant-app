@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/presentation/screen/favorite_restaurant/favorite_restaurant_list_screen.dart';
 import 'package:restaurant_app/presentation/screen/restaurant_list_screen.dart';
+import 'package:restaurant_app/presentation/screen/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _listWidget = [
     RestaurantListScreen(),
     FavoriteRestaurantListScreen(),
+    SettingsScreen(),
   ];
 
   List<BottomNavigationBarItem> _bottomNavigationBarItems = [
@@ -24,6 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
     BottomNavigationBarItem(
       icon: Icon(Icons.bookmark),
       label: "Bookmark",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      label: "Settings",
     ),
   ];
 

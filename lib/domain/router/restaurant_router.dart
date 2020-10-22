@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
+import 'package:restaurant_app/domain/router/route_path.dart';
+import 'package:restaurant_app/external/navigation.dart';
 import 'package:restaurant_app/presentation/bloc/detail_restaurant_bloc/get_detail_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/bloc/favorite_restaurant_bloc/favorite_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/screen/add_review_screen.dart';
-import 'package:restaurant_app/presentation/screen/detail_restaurant_screen/detail_restaurant_screen.dart';
 import 'package:restaurant_app/presentation/screen/favorite_restaurant/detail_favorite_restaurant_screen.dart';
-import 'package:restaurant_app/presentation/screen/search_restaurant_screen.dart';
 
 abstract class RestaurantRouter {
-  goToDetailListRestaurant(context, String restaurantId, String restaurantName,
-      String restaurantImage);
+  goToHome();
 
-  goToSearchRestaurant(context);
+  goToDetailListRestaurant(RestaurantEntity restaurantEntity);
+
+  goToSearchRestaurant();
 
   goToAddReview(context, String restaurantId);
 
@@ -21,25 +23,15 @@ abstract class RestaurantRouter {
 
 class RestaurantRouterImpl extends RestaurantRouter {
   @override
-  goToDetailListRestaurant(context, String restaurantId, String restaurantName,
-          String restaurantImage) =>
-      Navigator.push(
-        context,
-        PageRouteBuilder(
-          transitionDuration: Duration(milliseconds: 1000),
-          pageBuilder: (BuildContext context, Animation<double> animation,
-                  Animation<double> secondaryAnimation) =>
-              DetailRestaurantScreen(
-            restaurantId: restaurantId,
-            restaurantImage: restaurantImage,
-            restaurantName: restaurantName,
-          ),
-        ),
-      );
+  goToHome() => CustomNavigator.pushReplacementNamed(RoutePath.home);
 
   @override
-  goToSearchRestaurant(context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SearchRestaurantScreen()));
+  goToDetailListRestaurant( RestaurantEntity restaurantEntity) =>
+      CustomNavigator.pushNamed(RoutePath.restaurantDetail,
+          arguments: restaurantEntity);
+
+  @override
+  goToSearchRestaurant() => CustomNavigator.pushNamed(RoutePath.searchRestaurant,);
 
   @override
   goToAddReview(context, String restaurantId) => Navigator.push(
@@ -65,7 +57,6 @@ class RestaurantRouterImpl extends RestaurantRouter {
             restaurantName: restaurantName,
           ),
         ),
-      ).then((value) =>
-          BlocProvider.of<FavoriteRestaurantBloc>(context)
-              .add(GetListFavoriteRestaurant()));
+      ).then((value) => BlocProvider.of<FavoriteRestaurantBloc>(context)
+          .add(GetListFavoriteRestaurant()));
 }

@@ -9,6 +9,7 @@ import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
 import 'package:restaurant_app/domain/entity/detail_restaurant_entity.dart';
+import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/usecase/favorite_resaturant_usecase.dart';
 import 'package:restaurant_app/domain/usecase/get_restaurant_detail_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
@@ -31,14 +32,10 @@ part 'drinks_screen.dart';
 part 'reviews_screen.dart';
 
 class DetailRestaurantScreen extends StatefulWidget {
-  final String restaurantId;
-  final String restaurantName;
-  final String restaurantImage;
+  final RestaurantEntity restaurantEntity;
 
   DetailRestaurantScreen(
-      {@required this.restaurantId,
-      @required this.restaurantName,
-      @required this.restaurantImage});
+      {@required this.restaurantEntity});
 
   @override
   _DetailRestaurantScreenState createState() => _DetailRestaurantScreenState();
@@ -66,7 +63,7 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
               ),
             ),
           )..add(
-              GetDetailRestaurant(restaurantId: widget.restaurantId),
+              GetDetailRestaurant(restaurantId: widget.restaurantEntity.id),
             ),
         ),
         BlocProvider(
@@ -78,7 +75,7 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                 ),
               ),
             ),
-          )..add(GetListFavoriteRestaurantById(id: widget.restaurantId)),
+          )..add(GetListFavoriteRestaurantById(id: widget.restaurantEntity.id)),
         ),
       ],
       child: DefaultTabController(
@@ -94,11 +91,11 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                   iconTheme: IconThemeData(color: CustomColors.white),
                   flexibleSpace: FlexibleSpaceBar(
                     background: Hero(
-                      tag: widget.restaurantName,
+                      tag: widget.restaurantEntity.name,
                       child: Material(
                         color: Colors.transparent,
                         child: Image.network(
-                          widget.restaurantImage,
+                          widget.restaurantEntity.pictureId,
                           fit: BoxFit.fitWidth,
                         ),
                       ),
@@ -106,7 +103,7 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
                   ),
                   centerTitle: false,
                   title: Text(
-                    widget.restaurantName,
+                    widget.restaurantEntity.name,
                     style: TextStyle(
                         color: CustomColors.white,
                         fontWeight: FontWeight.bold,
