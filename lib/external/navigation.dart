@@ -7,13 +7,6 @@ class CustomNavigator {
     navigationKey.currentState.pushNamed(routeName, arguments: arguments);
   }
 
-  static pushNamedWithThenValue(String routeName,
-      {Object arguments, Object thenValue}) {
-    navigationKey.currentState
-        .pushNamed(routeName, arguments: arguments)
-        .then((value) => thenValue);
-  }
-
   static pushReplacementNamed(String routeName, {Object arguments}) {
     navigationKey.currentState
         .pushReplacementNamed(routeName, arguments: arguments);

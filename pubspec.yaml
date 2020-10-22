@@ -33,6 +33,7 @@ dependencies:
   flutter_screenutil: ^3.1.1
   dio: ^3.0.10
   moor_flutter: ^3.1.0
+  shared_preferences: ^0.5.12+2
   android_alarm_manager: ^0.4.5+15
   intl: ^0.16.1
   flutter_local_notifications: ^3.0.0

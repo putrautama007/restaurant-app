@@ -26,7 +26,7 @@ class AddReviewScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddReviewBloc(
           addReviewUseCase: AddReviewUseCaseImpl(
-              restaurantRepository: RestaurantRepositoryIml(
+              restaurantRepository: RestaurantRepositoryImpl(
                   remoteDataSource: RemoteDataSourceImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl)))))),
       child: Scaffold(

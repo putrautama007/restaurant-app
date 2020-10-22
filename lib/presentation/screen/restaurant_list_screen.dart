@@ -24,7 +24,7 @@ class RestaurantListScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetListRestaurantBloc(
         getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
-          restaurantRepository: RestaurantRepositoryIml(
+          restaurantRepository: RestaurantRepositoryImpl(
             remoteDataSource: RemoteDataSourceImpl(
               dio: Dio(
                 BaseOptions(

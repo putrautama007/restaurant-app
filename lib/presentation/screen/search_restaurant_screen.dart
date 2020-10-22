@@ -26,7 +26,7 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
     return BlocProvider(
         create: (context) => SearchRestaurantBloc(
               searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
-                restaurantRepository: RestaurantRepositoryIml(
+                restaurantRepository: RestaurantRepositoryImpl(
                   remoteDataSource: RemoteDataSourceImpl(
                     dio: Dio(
                       BaseOptions(baseUrl: ApiConstant.baseUrl),

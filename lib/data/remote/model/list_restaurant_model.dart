@@ -7,10 +7,11 @@ class RestaurantListModel extends Equatable {
   final int found;
   final List<RestaurantModel> restaurants;
 
-  RestaurantListModel({this.restaurants,this.error,this.message,this.count,this.found});
+  RestaurantListModel(
+      {this.restaurants, this.error, this.message, this.count, this.found});
 
   @override
-  List<Object> get props => [restaurants,error,message,count,found];
+  List<Object> get props => [restaurants, error, message, count, found];
 
   factory RestaurantListModel.fromJson(Map<String, dynamic> json) =>
       RestaurantListModel(
@@ -21,17 +22,6 @@ class RestaurantListModel extends Equatable {
         restaurants: List<RestaurantModel>.from(json['restaurants']
             .map((restaurant) => RestaurantModel.fromJson(restaurant))),
       );
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['error'] = this.error;
-    data['message'] = this.message;
-    data['count'] = this.count;
-    if (this.restaurants != null) {
-      data['restaurants'] = this.restaurants.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class RestaurantModel extends Equatable {
@@ -51,26 +41,15 @@ class RestaurantModel extends Equatable {
       this.rating});
 
   @override
-  List<Object> get props =>
-      [id, name, description, pictureId, city, rating];
+  List<Object> get props => [id, name, description, pictureId, city, rating];
 
-  factory RestaurantModel.fromJson(Map<String, dynamic> json) => RestaurantModel(
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
+      RestaurantModel(
         id: json['id'],
         name: json['name'],
         description: json['description'],
         pictureId: json['pictureId'],
         city: json['city'],
-        rating: json['rating'].toDouble(),
+        rating: json['rating'],
       );
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['pictureId'] = this.pictureId;
-    data['city'] = this.city;
-    data['rating'] = this.rating;
-    return data;
-  }
 }

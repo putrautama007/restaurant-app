@@ -52,7 +52,7 @@ class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
         BlocProvider(
           create: (context) => GetDetailRestaurantBloc(
             getRestaurantDetailUseCase: GetRestaurantDetailUseCaseImpl(
-              restaurantRepository: RestaurantRepositoryIml(
+              restaurantRepository: RestaurantRepositoryImpl(
                 remoteDataSource: RemoteDataSourceImpl(
                   dio: Dio(
                     BaseOptions(

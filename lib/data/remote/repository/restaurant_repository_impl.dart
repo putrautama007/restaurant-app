@@ -6,10 +6,10 @@ import 'package:restaurant_app/domain/entity/detail_restaurant_entity.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 
-class RestaurantRepositoryIml extends RestaurantRepository {
+class RestaurantRepositoryImpl extends RestaurantRepository {
   RemoteDataSource remoteDataSource;
 
-  RestaurantRepositoryIml({@required this.remoteDataSource});
+  RestaurantRepositoryImpl({@required this.remoteDataSource});
 
   @override
   Future<RestaurantListEntity> getListRestaurant() async {
