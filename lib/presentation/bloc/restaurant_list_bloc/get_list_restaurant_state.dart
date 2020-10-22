@@ -22,3 +22,12 @@ class GetListRestaurantLoadedState extends GetListRestaurantState {
   @override
   List<Object> get props => [listRestaurant];
 }
+
+class GetListRestaurantFailedState extends GetListRestaurantState {
+  final String message;
+
+  GetListRestaurantFailedState({this.message});
+
+  @override
+  List<Object> get props => [message];
+}

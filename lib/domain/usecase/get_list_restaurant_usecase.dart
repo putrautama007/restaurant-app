@@ -3,7 +3,7 @@ import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 
 abstract class GetListRestaurantUseCase {
-  Future<List<RestaurantEntity>> getListRestaurant();
+  Future<RestaurantListEntity> getListRestaurant();
 }
 
 class GetListRestaurantUseCaseImpl extends GetListRestaurantUseCase {
@@ -12,6 +12,6 @@ class GetListRestaurantUseCaseImpl extends GetListRestaurantUseCase {
   GetListRestaurantUseCaseImpl({@required this.restaurantRepository});
 
   @override
-  Future<List<RestaurantEntity>> getListRestaurant() =>
+  Future<RestaurantListEntity> getListRestaurant() =>
       restaurantRepository.getListRestaurant();
 }

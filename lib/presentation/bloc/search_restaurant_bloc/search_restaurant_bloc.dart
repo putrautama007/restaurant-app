@@ -20,8 +20,13 @@ class SearchRestaurantBloc
     if (event is SearchRestaurant) {
       yield SearchRestaurantLoadingState();
       var listRestaurant = await searchRestaurantUseCase
-          .getListRestaurantByName(event.searchText);
-      yield SearchRestaurantLoadedState(listRestaurant: listRestaurant);
+          .searchRestaurant(event.searchText);
+      if (listRestaurant.error != true) {
+        yield SearchRestaurantLoadedState(listRestaurant: listRestaurant.restaurants);
+      } else {
+        yield SearchRestaurantFailedState(message: listRestaurant.message);
+      }
+
     }
   }
 }

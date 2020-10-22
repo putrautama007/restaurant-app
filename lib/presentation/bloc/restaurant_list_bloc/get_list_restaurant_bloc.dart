@@ -20,7 +20,12 @@ class GetListRestaurantBloc
     if (event is GetListRestaurant) {
       yield GetListRestaurantLoadingState();
       var listRestaurant = await getListRestaurantUseCase.getListRestaurant();
-      yield GetListRestaurantLoadedState(listRestaurant: listRestaurant);
+      if (listRestaurant.error != true) {
+        yield GetListRestaurantLoadedState(
+            listRestaurant: listRestaurant.restaurants);
+      } else {
+        yield GetListRestaurantFailedState(message: listRestaurant.message);
+      }
     }
   }
 }

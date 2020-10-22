@@ -7,14 +7,17 @@ class DrinksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: drinks.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.w),
-            child: Text(drinks[index].name,style: TextStyle(fontSize: 20.sp,color: CustomColors.darkGrey),),
-          );
-        });
+    return Container(
+      color: CustomColors.lightYellow,
+      child: ListView.builder(
+          itemCount: drinks.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 16.w),
+              child: Text(drinks[index].name,style: TextStyle(fontSize: 20.sp,color: CustomColors.darkGrey),),
+            );
+          }),
+    );
   }
 }
