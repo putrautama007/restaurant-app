@@ -72,7 +72,7 @@ class FavoriteRestaurantListScreen extends StatelessWidget {
               } else {
                 return Container(
                   margin: EdgeInsets.only(top: 16.w),
-                  height: 1.hp,
+                  height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     color: CustomColors.lightYellow,
                     borderRadius: BorderRadius.only(
