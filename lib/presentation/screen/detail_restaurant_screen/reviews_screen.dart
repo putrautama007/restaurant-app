@@ -3,7 +3,7 @@ part of 'detail_restaurant_screen.dart';
 class ReviewsScreen extends StatelessWidget {
   final List<ConsumerReviewEntity> consumerReviews;
   final String restaurantId;
-  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
+  final RestaurantRouter _restaurantListRouter = RestaurantRouterImpl();
 
   ReviewsScreen({this.consumerReviews, this.restaurantId});
 

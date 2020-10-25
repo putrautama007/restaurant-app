@@ -7,10 +7,11 @@ class RestaurantListModel extends Equatable {
   final int found;
   final List<RestaurantModel> restaurants;
 
-  RestaurantListModel({this.restaurants,this.error,this.message,this.count,this.found});
+  RestaurantListModel(
+      {this.restaurants, this.error, this.message, this.count, this.found});
 
   @override
-  List<Object> get props => [restaurants,error,message,count,found];
+  List<Object> get props => [restaurants, error, message, count, found];
 
   factory RestaurantListModel.fromJson(Map<String, dynamic> json) =>
       RestaurantListModel(
@@ -29,7 +30,7 @@ class RestaurantModel extends Equatable {
   final String description;
   final String pictureId;
   final String city;
-  final double rating;
+  final String rating;
 
   RestaurantModel(
       {this.id,
@@ -40,15 +41,15 @@ class RestaurantModel extends Equatable {
       this.rating});
 
   @override
-  List<Object> get props =>
-      [id, name, description, pictureId, city, rating];
+  List<Object> get props => [id, name, description, pictureId, city, rating];
 
-  factory RestaurantModel.fromJson(Map<String, dynamic> json) => RestaurantModel(
+  factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
+      RestaurantModel(
         id: json['id'],
         name: json['name'],
         description: json['description'],
         pictureId: json['pictureId'],
         city: json['city'],
-        rating: json['rating'].toDouble(),
+        rating: json['rating'].toString(),
       );
 }

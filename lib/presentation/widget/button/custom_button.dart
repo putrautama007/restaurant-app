@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     CustomScreenUtils.initScreenUtils(context);
     return Container(
-      width: 1.wp,
+      width: MediaQuery.of(context).size.width,
       height: 40.w,
       decoration: BoxDecoration(
           color: CustomColors.yellow,

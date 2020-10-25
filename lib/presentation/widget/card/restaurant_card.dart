@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/data/local/model/restaurant_table.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
-import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
+import 'package:restaurant_app/domain/router/restaurant_router.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RestaurantCard extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
-  final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
+  final RestaurantTableData restaurantTableData;
+  final RestaurantRouter _restaurantListRouter = RestaurantRouterImpl();
 
-  RestaurantCard({@required this.restaurantEntity});
+  RestaurantCard({this.restaurantEntity, this.restaurantTableData});
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +30,28 @@ class RestaurantCard extends StatelessWidget {
         ],
       ),
       child: InkWell(
-        onTap: () => _restaurantListRouter.goToDetailListRestaurant(
-            context, restaurantEntity.id,restaurantEntity.name,restaurantEntity.pictureId),
+        onTap: () => restaurantEntity != null
+            ? _restaurantListRouter.goToDetailListRestaurant(
+                restaurantEntity)
+            : _restaurantListRouter.goToDetailFavoriteRestaurant(
+                context,
+                restaurantTableData.id,
+                restaurantTableData.name,
+                restaurantTableData.pictureId),
         child: Row(
           children: [
             Hero(
-              tag: restaurantEntity.name,
+              tag: restaurantEntity != null
+                  ? restaurantEntity.name
+                  : restaurantTableData.name,
               child: Material(
                 color: Colors.transparent,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Image.network(
-                    restaurantEntity.pictureId,
+                    restaurantEntity != null
+                        ? restaurantEntity.pictureId
+                        : restaurantTableData.pictureId,
                     height: 90.w,
                     width: 125.w,
                     fit: BoxFit.cover,
@@ -56,7 +68,9 @@ class RestaurantCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      restaurantEntity.name,
+                      restaurantEntity != null
+                          ? restaurantEntity.name
+                          : restaurantTableData.name,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.darkGrey,
@@ -75,7 +89,10 @@ class RestaurantCard extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text(restaurantEntity.city,
+                            child: Text(
+                                restaurantEntity != null
+                                    ? restaurantEntity.city
+                                    : restaurantTableData.city,
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     color: CustomColors.darkGrey,
@@ -97,7 +114,10 @@ class RestaurantCard extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text(restaurantEntity.rating,
+                            child: Text(
+                                restaurantEntity != null
+                                    ? restaurantEntity.rating
+                                    : restaurantTableData.rating,
                                 style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     color: CustomColors.darkGrey,

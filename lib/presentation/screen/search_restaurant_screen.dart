@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
-import 'package:restaurant_app/domain/usecase/serch_restaurant_usecase.dart';
+import 'package:restaurant_app/domain/usecase/search_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_screen_utils.dart';
@@ -26,7 +26,7 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
     return BlocProvider(
         create: (context) => SearchRestaurantBloc(
               searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
-                restaurantRepository: RestaurantRepositoryIml(
+                restaurantRepository: RestaurantRepositoryImpl(
                   remoteDataSource: RemoteDataSourceImpl(
                     dio: Dio(
                       BaseOptions(baseUrl: ApiConstant.baseUrl),
