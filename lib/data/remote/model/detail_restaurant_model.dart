@@ -75,7 +75,7 @@ class RestaurantData extends Equatable {
         categories: List<CategoryModel>.from(json['categories']
             .map((category) => CategoryModel.fromJson(category))),
         menus: MenusModel.fromJson(json['menus']),
-        consumerReviews: List<ConsumerReviewModel>.from(json['consumerReviews']
+        consumerReviews: List<ConsumerReviewModel>.from(json['customerReviews']
             .map((consumerReview) => ConsumerReviewModel.fromJson(consumerReview))),
       );
 }
