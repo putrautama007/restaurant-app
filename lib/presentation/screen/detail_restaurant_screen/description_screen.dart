@@ -3,12 +3,14 @@ part of 'detail_restaurant_screen.dart';
 class DescriptionScreen extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
 
-  DescriptionScreen({@required this.restaurantEntity});
+  DescriptionScreen({
+    @required this.restaurantEntity,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left:16.w,right: 16.w),
+      padding: EdgeInsets.only(left: 16.w, right: 16.w),
       child: ListView(
         children: [
           Row(

@@ -13,12 +13,18 @@ class RestaurantListRouterImpl extends RestaurantListRouter {
   @override
   goToDetailListRestaurant(context, RestaurantEntity restaurantEntity) =>
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  DetailRestaurantScreen(restaurantEntity: restaurantEntity)));
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              DetailRestaurantScreen(restaurantEntity: restaurantEntity),
+        ),
+      );
 
   @override
-  goToSearchRestaurant(context) => Navigator.push(context,
-      MaterialPageRoute(builder: (context) => SearchRestaurantScreen()));
+  goToSearchRestaurant(context) => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SearchRestaurantScreen(),
+        ),
+      );
 }

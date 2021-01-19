@@ -9,7 +9,9 @@ abstract class SearchRestaurantUseCase {
 class SearchRestaurantUseCaseImpl extends SearchRestaurantUseCase {
   RestaurantRepository restaurantRepository;
 
-  SearchRestaurantUseCaseImpl({@required this.restaurantRepository});
+  SearchRestaurantUseCaseImpl({
+    @required this.restaurantRepository,
+  });
 
   @override
   Future<List<RestaurantEntity>> getListRestaurantByName(

@@ -9,7 +9,9 @@ abstract class GetListRestaurantUseCase {
 class GetListRestaurantUseCaseImpl extends GetListRestaurantUseCase {
   RestaurantRepository restaurantRepository;
 
-  GetListRestaurantUseCaseImpl({@required this.restaurantRepository});
+  GetListRestaurantUseCaseImpl({
+    @required this.restaurantRepository,
+  });
 
   @override
   Future<List<RestaurantEntity>> getListRestaurant() =>

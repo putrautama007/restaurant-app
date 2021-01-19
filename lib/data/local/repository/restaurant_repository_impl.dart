@@ -10,22 +10,22 @@ class RestaurantRepositoryIml extends RestaurantRepository {
 
   @override
   Future<List<RestaurantEntity>> getListRestaurant() async {
-    List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
-    var restaurantData = await localDataSource.getRestaurantList();
-    restaurantData.restaurants.forEach((restaurant) {
-      List<FoodsEntity> foodList = List<FoodsEntity>();
+    List<RestaurantEntity> _listRestaurant = List<RestaurantEntity>();
+    var _restaurantData = await localDataSource.getRestaurantList();
+    _restaurantData.restaurants.forEach((restaurant) {
+      List<FoodsEntity> _foodList = List<FoodsEntity>();
       restaurant.menus.foods.forEach((food) {
         var foodEntity = FoodsEntity(name: food.name);
-        foodList.add(foodEntity);
+        _foodList.add(foodEntity);
       });
 
-      List<DrinksEntity> drinkList = List<DrinksEntity>();
+      List<DrinksEntity> _drinkList = List<DrinksEntity>();
       restaurant.menus.drinks.forEach((drink) {
         var drinkEntity = DrinksEntity(name: drink.name);
-        drinkList.add(drinkEntity);
+        _drinkList.add(drinkEntity);
       });
 
-      var restaurantEntity = RestaurantEntity(
+      var _restaurantEntity = RestaurantEntity(
           id: restaurant.id,
           name: restaurant.name,
           description: restaurant.description,
@@ -33,13 +33,13 @@ class RestaurantRepositoryIml extends RestaurantRepository {
           city: restaurant.city,
           rating: restaurant.rating,
           menus: MenusEntity(
-            foods: foodList,
-            drinks: drinkList,
+            foods: _foodList,
+            drinks: _drinkList,
           ));
-      listRestaurant.add(restaurantEntity);
+      _listRestaurant.add(_restaurantEntity);
     });
 
-    return listRestaurant;
+    return _listRestaurant;
   }
 
   @override

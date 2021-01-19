@@ -19,8 +19,8 @@ class GetListRestaurantBloc
       GetListRestaurantEvent event) async* {
     if (event is GetListRestaurant) {
       yield GetListRestaurantLoadingState();
-      var listRestaurant = await getListRestaurantUseCase.getListRestaurant();
-      yield GetListRestaurantLoadedState(listRestaurant: listRestaurant);
+      var _listRestaurant = await getListRestaurantUseCase.getListRestaurant();
+      yield GetListRestaurantLoadedState(listRestaurant: _listRestaurant);
     }
   }
 }

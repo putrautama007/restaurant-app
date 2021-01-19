@@ -5,13 +5,17 @@ import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 part 'description_screen.dart';
+
 part 'foods_screen.dart';
+
 part 'drinks_screen.dart';
 
 class DetailRestaurantScreen extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
 
-  DetailRestaurantScreen({@required this.restaurantEntity});
+  DetailRestaurantScreen({
+    @required this.restaurantEntity,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +51,15 @@ class DetailRestaurantScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   tabs: [
-                    Tab(text: "Description",),
-                    Tab(text: "Foods",),
-                    Tab(text: "Drinks",),
+                    Tab(
+                      text: "Description",
+                    ),
+                    Tab(
+                      text: "Foods",
+                    ),
+                    Tab(
+                      text: "Drinks",
+                    ),
                   ],
                 ),
               ),
@@ -57,9 +67,13 @@ class DetailRestaurantScreen extends StatelessWidget {
           },
           body: TabBarView(
             children: [
-             DescriptionScreen(restaurantEntity: restaurantEntity),
-             FoodsScreen(foods: restaurantEntity.menus.foods,),
-             DrinksScreen(drinks: restaurantEntity.menus.drinks,),
+              DescriptionScreen(restaurantEntity: restaurantEntity),
+              FoodsScreen(
+                foods: restaurantEntity.menus.foods,
+              ),
+              DrinksScreen(
+                drinks: restaurantEntity.menus.drinks,
+              ),
             ],
           ),
         ),

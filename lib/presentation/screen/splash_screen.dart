@@ -12,13 +12,21 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
-      create: (context) => SplashBloc()..add(LoadSplashScreenEvent()),
+      create: (context) => SplashBloc()
+        ..add(
+          LoadSplashScreenEvent(),
+        ),
       child: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
           if (state is SplashLoadedState) {
-            Future.delayed(Duration(seconds: 2)).then((_) => Navigator.pushReplacement(
+            Future.delayed(Duration(seconds: 2)).then(
+              (_) => Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen())));
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              ),
+            );
           }
         },
         child: BlocBuilder<SplashBloc, SplashState>(builder: (context, state) {

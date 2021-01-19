@@ -3,10 +3,14 @@ import 'package:equatable/equatable.dart';
 class RestaurantListEntity extends Equatable {
   final List<RestaurantEntity> restaurants;
 
-  RestaurantListEntity({this.restaurants});
+  RestaurantListEntity({
+    this.restaurants,
+  });
 
   @override
-  List<Object> get props => [restaurants];
+  List<Object> get props => [
+        restaurants,
+      ];
 }
 
 class RestaurantEntity extends Equatable {
@@ -28,34 +32,55 @@ class RestaurantEntity extends Equatable {
       this.menus});
 
   @override
-  List<Object> get props =>
-      [id, name, description, pictureId, city, rating, menus];
+  List<Object> get props => [
+        id,
+        name,
+        description,
+        pictureId,
+        city,
+        rating,
+        menus,
+      ];
 }
 
 class MenusEntity extends Equatable {
   final List<FoodsEntity> foods;
   final List<DrinksEntity> drinks;
 
-  MenusEntity({this.foods, this.drinks});
+  MenusEntity({
+    this.foods,
+    this.drinks,
+  });
 
   @override
-  List<Object> get props => [foods, drinks];
+  List<Object> get props => [
+        foods,
+        drinks,
+      ];
 }
 
 class FoodsEntity extends Equatable {
   final String name;
 
-  FoodsEntity({this.name});
+  FoodsEntity({
+    this.name,
+  });
 
   @override
-  List<Object> get props => [name];
+  List<Object> get props => [
+        name,
+      ];
 }
 
 class DrinksEntity extends Equatable {
   final String name;
 
-  DrinksEntity({this.name});
+  DrinksEntity({
+    this.name,
+  });
 
   @override
-  List<Object> get props => [name];
+  List<Object> get props => [
+        name,
+      ];
 }

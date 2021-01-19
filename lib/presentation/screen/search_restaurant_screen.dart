@@ -20,10 +20,14 @@ class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
     CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
       create: (context) => SearchRestaurantBloc(
-          searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
-              restaurantRepository: RestaurantRepositoryIml(
-                  localDataSource: LocalDataSourceImpl())))
-        ..add(SearchRestaurant(searchText: "")),
+        searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
+          restaurantRepository: RestaurantRepositoryIml(
+            localDataSource: LocalDataSourceImpl(),
+          ),
+        ),
+      )..add(
+          SearchRestaurant(searchText: ""),
+        ),
       child: BlocBuilder<SearchRestaurantBloc, SearchRestaurantState>(
         builder: (context, state) {
           if (state is SearchRestaurantLoadedState) {

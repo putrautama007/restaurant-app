@@ -19,9 +19,9 @@ class SearchRestaurantBloc
       SearchRestaurantEvent event) async* {
     if (event is SearchRestaurant) {
       yield SearchRestaurantLoadingState();
-      var listRestaurant = await searchRestaurantUseCase
+      var _listRestaurant = await searchRestaurantUseCase
           .getListRestaurantByName(event.searchText);
-      yield SearchRestaurantLoadedState(listRestaurant: listRestaurant);
+      yield SearchRestaurantLoadedState(listRestaurant: _listRestaurant);
     }
   }
 }
