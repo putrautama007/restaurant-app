@@ -6,7 +6,6 @@ import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl.dart';
 import 'package:restaurant_app/domain/usecase/add_review_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
-import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/presentation/bloc/add_review/add_review_bloc.dart';
 import 'package:restaurant_app/presentation/widget/button/custom_button.dart';
@@ -22,23 +21,20 @@ class AddReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
       create: (context) => AddReviewBloc(
           addReviewUseCase: AddReviewUseCaseImpl(
               restaurantRepository: RestaurantRepositoryIml(
-                  remoteDataSource: RemoteDataSourceImpl(
-                      dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl)))))),
+                  remoteDataSource:
+                      RemoteDataSourceImpl(dio: Dio(BaseOptions(baseUrl: ApiConstant.baseUrl)))))),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: CustomColors.yellow,
           iconTheme: IconThemeData(color: CustomColors.white),
           title: Text(
             "Add Review",
-            style: TextStyle(
-                color: CustomColors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20.sp),
+            style:
+                TextStyle(color: CustomColors.white, fontWeight: FontWeight.bold, fontSize: 20.sp),
           ),
         ),
         body: BlocListener<AddReviewBloc, AddReviewState>(
@@ -58,8 +54,7 @@ class AddReviewScreen extends StatelessWidget {
               CustomTextField(
                   controller: _userNameController,
                   hint: "Your name",
-                  onFieldSubmitted: (v) =>
-                      FocusScope.of(context).requestFocus(_reviewFocusNode),
+                  onFieldSubmitted: (v) => FocusScope.of(context).requestFocus(_reviewFocusNode),
                   keyboardType: TextInputType.name),
               CustomTextField(
                 controller: _reviewController,
@@ -70,8 +65,7 @@ class AddReviewScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(16.w),
-                child: BlocBuilder<AddReviewBloc, AddReviewState>(
-                    builder: (context, state) {
+                child: BlocBuilder<AddReviewBloc, AddReviewState>(builder: (context, state) {
                   if (state is AddReviewLoadingState) {
                     return Stack(
                       children: [
@@ -82,8 +76,7 @@ class AddReviewScreen extends StatelessWidget {
                         ),
                         Center(
                           child: CircularProgressIndicator(
-                            valueColor: new AlwaysStoppedAnimation<Color>(
-                                CustomColors.darkGrey),
+                            valueColor: new AlwaysStoppedAnimation<Color>(CustomColors.darkGrey),
                           ),
                         ),
                       ],
@@ -92,11 +85,10 @@ class AddReviewScreen extends StatelessWidget {
                     return CustomButton(
                       borderRadius: 10.0,
                       text: "Add Review",
-                      onTap: () => BlocProvider.of<AddReviewBloc>(context).add(
-                          AddReview(
-                              restaurantId: restaurantId,
-                              userName: _userNameController.text,
-                              review: _reviewController.text)),
+                      onTap: () => BlocProvider.of<AddReviewBloc>(context).add(AddReview(
+                          restaurantId: restaurantId,
+                          userName: _userNameController.text,
+                          review: _reviewController.text)),
                     );
                   }
                 }),
@@ -111,9 +103,16 @@ class AddReviewScreen extends StatelessWidget {
   void errorMessage(context, String message) {
     final _snackBar = SnackBar(
       duration: const Duration(seconds: 1),
-      backgroundColor: CustomColors.yellow,
-      content: Text(message, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.sp),),
+      backgroundColor: Colors.red,
+      content: Text(
+        message,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 16.sp,
+          color: Colors.white,
+        ),
+      ),
     );
-    Scaffold.of(context).showSnackBar(_snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
   }
 }

@@ -7,7 +7,6 @@ import 'package:restaurant_app/data/remote/repository/restaurant_repository_impl
 import 'package:restaurant_app/domain/entity/detail_restaurant_entity.dart';
 import 'package:restaurant_app/domain/usecase/get_restaurant_detail_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
-import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/image_strings.dart';
 import 'package:restaurant_app/presentation/bloc/detail_restaurant_bloc/get_detail_restaurant_bloc.dart';
@@ -41,7 +40,6 @@ class DetailRestaurantScreen extends StatefulWidget {
 class _DetailRestaurantScreenState extends State<DetailRestaurantScreen> {
   @override
   Widget build(BuildContext context) {
-    CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
       create: (context) => GetDetailRestaurantBloc(
           getRestaurantDetailUseCase: GetRestaurantDetailUseCaseImpl(

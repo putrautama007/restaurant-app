@@ -13,15 +13,14 @@ class RestaurantRepositoryIml extends RestaurantRepository {
 
   @override
   Future<RestaurantListEntity> getListRestaurant() async {
-    List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
+    List<RestaurantEntity> listRestaurant = [];
     var restaurantData = await remoteDataSource.getRestaurantList();
     restaurantData.restaurants.forEach((restaurant) {
       var restaurantEntity = RestaurantEntity(
           id: restaurant.id,
           name: restaurant.name,
           description: restaurant.description,
-          pictureId:
-              "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
+          pictureId: "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
           rating: restaurant.rating.toString());
       listRestaurant.add(restaurantEntity);
@@ -38,7 +37,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
 
   @override
   Future<RestaurantListEntity> searchRestaurant(String restaurantName) async {
-    List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
+    List<RestaurantEntity> listRestaurant = [];
     listRestaurant.clear();
     var restaurantData = await remoteDataSource.searchRestaurant(restaurantName);
     restaurantData.restaurants.forEach((restaurant) {
@@ -46,8 +45,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
           id: restaurant.id,
           name: restaurant.name,
           description: restaurant.description,
-          pictureId:
-              "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
+          pictureId: "${ApiConstant.smallImageResolution}${restaurant.pictureId}",
           city: restaurant.city,
           rating: restaurant.rating.toString());
       listRestaurant.add(restaurantEntity);
@@ -63,35 +61,30 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   }
 
   @override
-  Future<DetailRestaurantEntity> getRestaurantDetail(
-      String restaurantId) async {
-    var restaurantData =
-        await remoteDataSource.getRestaurantDetail(restaurantId);
-    List<CategoryEntity> categoryList = List<CategoryEntity>();
+  Future<DetailRestaurantEntity> getRestaurantDetail(String restaurantId) async {
+    var restaurantData = await remoteDataSource.getRestaurantDetail(restaurantId);
+    List<CategoryEntity> categoryList = [];
     restaurantData.restaurant.categories.forEach((category) {
       var categoryEntity = CategoryEntity(name: category.name);
       categoryList.add(categoryEntity);
     });
 
-    List<FoodsEntity> foodList = List<FoodsEntity>();
+    List<FoodsEntity> foodList = [];
     restaurantData.restaurant.menus.foods.forEach((food) {
       var foodEntity = FoodsEntity(name: food.name);
       foodList.add(foodEntity);
     });
 
-    List<DrinksEntity> drinkList = List<DrinksEntity>();
+    List<DrinksEntity> drinkList = [];
     restaurantData.restaurant.menus.drinks.forEach((drink) {
       var drinkEntity = DrinksEntity(name: drink.name);
       drinkList.add(drinkEntity);
     });
 
-    List<ConsumerReviewEntity> consumerReviewList =
-        List<ConsumerReviewEntity>();
+    List<ConsumerReviewEntity> consumerReviewList = [];
     restaurantData.restaurant.consumerReviews.forEach((consumerReview) {
       var consumerReviewEntity = ConsumerReviewEntity(
-          name: consumerReview.name,
-          review: consumerReview.review,
-          date: consumerReview.date);
+          name: consumerReview.name, review: consumerReview.review, date: consumerReview.date);
       consumerReviewList.add(consumerReviewEntity);
     });
 
@@ -101,8 +94,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
       id: restaurantData.restaurant.id,
       name: restaurantData.restaurant.name,
       description: restaurantData.restaurant.description,
-      pictureId:
-          "${ApiConstant.smallImageResolution}${restaurantData.restaurant.pictureId}",
+      pictureId: "${ApiConstant.smallImageResolution}${restaurantData.restaurant.pictureId}",
       city: restaurantData.restaurant.city,
       address: restaurantData.restaurant.address,
       rating: restaurantData.restaurant.rating.toString(),
@@ -117,12 +109,10 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   }
 
   @override
-  Future<AddReviewsEntity> addReview(
-      String restaurantId, String userName, String review) async {
-    var consumerReview =
-        await remoteDataSource.addReview(restaurantId, userName, review);
-    var consumerReviewEntity = AddReviewsEntity(
-        error: consumerReview.error, message: consumerReview.message);
+  Future<AddReviewsEntity> addReview(String restaurantId, String userName, String review) async {
+    var consumerReview = await remoteDataSource.addReview(restaurantId, userName, review);
+    var consumerReviewEntity =
+        AddReviewsEntity(error: consumerReview.error, message: consumerReview.message);
 
     return consumerReviewEntity;
   }

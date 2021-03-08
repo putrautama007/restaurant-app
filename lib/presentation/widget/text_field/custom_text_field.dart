@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
-import 'package:restaurant_app/external/custom_screen_utils.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -22,7 +21,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomScreenUtils.initScreenUtils(context);
     return Container(
       decoration: BoxDecoration(
         color: CustomColors.white,

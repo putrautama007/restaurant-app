@@ -8,7 +8,6 @@ import 'package:restaurant_app/domain/router/restaurant_list_router.dart';
 import 'package:restaurant_app/domain/usecase/get_list_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:restaurant_app/external/image_strings.dart';
 import 'package:restaurant_app/presentation/bloc/restaurant_list_bloc/get_list_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
@@ -20,7 +19,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
       create: (context) => GetListRestaurantBloc(
         getListRestaurantUseCase: GetListRestaurantUseCaseImpl(
