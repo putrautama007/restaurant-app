@@ -5,7 +5,6 @@ import 'package:restaurant_app/data/local/repository/restaurant_repository_impl.
 import 'package:restaurant_app/domain/usecase/serch_restaurant_usecase.dart';
 import 'package:restaurant_app/external/custom_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:restaurant_app/external/custom_screen_utils.dart';
 import 'package:restaurant_app/presentation/bloc/search_restaurant_bloc/search_restaurant_bloc.dart';
 import 'package:restaurant_app/presentation/widget/card/restaurant_card.dart';
 
@@ -17,7 +16,6 @@ class SearchRestaurantScreen extends StatefulWidget {
 class _SearchRestaurantScreenState extends State<SearchRestaurantScreen> {
   @override
   Widget build(BuildContext context) {
-    CustomScreenUtils.initScreenUtils(context);
     return BlocProvider(
       create: (context) => SearchRestaurantBloc(
         searchRestaurantUseCase: SearchRestaurantUseCaseImpl(
