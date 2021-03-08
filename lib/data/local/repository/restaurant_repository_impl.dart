@@ -10,16 +10,16 @@ class RestaurantRepositoryIml extends RestaurantRepository {
 
   @override
   Future<List<RestaurantEntity>> getListRestaurant() async {
-    List<RestaurantEntity> _listRestaurant = List<RestaurantEntity>();
+    List<RestaurantEntity> _listRestaurant = [];
     var _restaurantData = await localDataSource.getRestaurantList();
     _restaurantData.restaurants.forEach((restaurant) {
-      List<FoodsEntity> _foodList = List<FoodsEntity>();
+      List<FoodsEntity> _foodList = [];
       restaurant.menus.foods.forEach((food) {
         var foodEntity = FoodsEntity(name: food.name);
         _foodList.add(foodEntity);
       });
 
-      List<DrinksEntity> _drinkList = List<DrinksEntity>();
+      List<DrinksEntity> _drinkList = [];
       restaurant.menus.drinks.forEach((drink) {
         var drinkEntity = DrinksEntity(name: drink.name);
         _drinkList.add(drinkEntity);
@@ -43,19 +43,18 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   }
 
   @override
-  Future<List<RestaurantEntity>> getListRestaurantByName(
-      String restaurantName) async {
-    List<RestaurantEntity> listRestaurant = List<RestaurantEntity>();
-    List<RestaurantEntity> filterListRestaurant = List<RestaurantEntity>();
+  Future<List<RestaurantEntity>> getListRestaurantByName(String restaurantName) async {
+    List<RestaurantEntity> listRestaurant = [];
+    List<RestaurantEntity> filterListRestaurant = [];
     var restaurantData = await localDataSource.getRestaurantList();
     restaurantData.restaurants.forEach((restaurant) {
-      List<FoodsEntity> foodList = List<FoodsEntity>();
+      List<FoodsEntity> foodList = [];
       restaurant.menus.foods.forEach((food) {
         var foodEntity = FoodsEntity(name: food.name);
         foodList.add(foodEntity);
       });
 
-      List<DrinksEntity> drinkList = List<DrinksEntity>();
+      List<DrinksEntity> drinkList = [];
       restaurant.menus.drinks.forEach((drink) {
         var drinkEntity = DrinksEntity(name: drink.name);
         drinkList.add(drinkEntity);
@@ -75,8 +74,7 @@ class RestaurantRepositoryIml extends RestaurantRepository {
       listRestaurant.add(restaurantEntity);
     });
     filterListRestaurant = listRestaurant
-        .where((food) =>
-            food.name.toLowerCase().contains(restaurantName.toLowerCase()))
+        .where((food) => food.name.toLowerCase().contains(restaurantName.toLowerCase()))
         .toList();
     return filterListRestaurant;
   }
