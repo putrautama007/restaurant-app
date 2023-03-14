@@ -4,7 +4,7 @@ class DescriptionScreen extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
 
   DescriptionScreen({
-    @required this.restaurantEntity,
+    required this.restaurantEntity,
   });
 
   @override

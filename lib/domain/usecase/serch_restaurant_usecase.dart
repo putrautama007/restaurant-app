@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 
@@ -10,7 +9,7 @@ class SearchRestaurantUseCaseImpl extends SearchRestaurantUseCase {
   RestaurantRepository restaurantRepository;
 
   SearchRestaurantUseCaseImpl({
-    @required this.restaurantRepository,
+    required this.restaurantRepository,
   });
 
   @override

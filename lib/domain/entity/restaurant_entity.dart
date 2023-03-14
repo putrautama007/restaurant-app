@@ -4,7 +4,7 @@ class RestaurantListEntity extends Equatable {
   final List<RestaurantEntity> restaurants;
 
   RestaurantListEntity({
-    this.restaurants,
+    required this.restaurants,
   });
 
   @override
@@ -22,14 +22,15 @@ class RestaurantEntity extends Equatable {
   final String rating;
   final MenusEntity menus;
 
-  RestaurantEntity(
-      {this.id,
-      this.name,
-      this.description,
-      this.pictureId,
-      this.city,
-      this.rating,
-      this.menus});
+  RestaurantEntity({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.pictureId,
+    required this.city,
+    required this.rating,
+    required this.menus,
+  });
 
   @override
   List<Object> get props => [
@@ -48,8 +49,8 @@ class MenusEntity extends Equatable {
   final List<DrinksEntity> drinks;
 
   MenusEntity({
-    this.foods,
-    this.drinks,
+    required this.foods,
+    required this.drinks,
   });
 
   @override
@@ -63,7 +64,7 @@ class FoodsEntity extends Equatable {
   final String name;
 
   FoodsEntity({
-    this.name,
+    required this.name,
   });
 
   @override
@@ -76,7 +77,7 @@ class DrinksEntity extends Equatable {
   final String name;
 
   DrinksEntity({
-    this.name,
+    required this.name,
   });
 
   @override

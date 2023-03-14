@@ -11,17 +11,13 @@ class SearchRestaurantBloc
     extends Bloc<SearchRestaurantEvent, SearchRestaurantState> {
   SearchRestaurantUseCase searchRestaurantUseCase;
 
-  SearchRestaurantBloc({this.searchRestaurantUseCase})
-      : super(SearchRestaurantInitialState());
-
-  @override
-  Stream<SearchRestaurantState> mapEventToState(
-      SearchRestaurantEvent event) async* {
-    if (event is SearchRestaurant) {
-      yield SearchRestaurantLoadingState();
-      var _listRestaurant = await searchRestaurantUseCase
+  SearchRestaurantBloc({required this.searchRestaurantUseCase})
+      : super(SearchRestaurantInitialState()) {
+    on<SearchRestaurant>((event, emit) async {
+      emit(SearchRestaurantLoadingState());
+      final _listRestaurant = await searchRestaurantUseCase
           .getListRestaurantByName(event.searchText);
-      yield SearchRestaurantLoadedState(listRestaurant: _listRestaurant);
-    }
+      emit(SearchRestaurantLoadedState(listRestaurant: _listRestaurant));
+    });
   }
 }

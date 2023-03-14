@@ -4,7 +4,7 @@ class DrinksScreen extends StatelessWidget {
   final List<DrinksEntity> drinks;
 
   DrinksScreen({
-    this.drinks,
+    required this.drinks,
   });
 
   @override

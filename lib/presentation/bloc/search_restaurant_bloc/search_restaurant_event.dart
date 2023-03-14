@@ -8,7 +8,7 @@ class SearchRestaurant extends SearchRestaurantEvent {
   final String searchText;
 
   SearchRestaurant({
-    this.searchText,
+    required this.searchText,
   });
 
   @override

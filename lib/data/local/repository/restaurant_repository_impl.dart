@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/data/local/datasource/local_data_source.dart';
 import 'package:restaurant_app/domain/entity/restaurant_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
@@ -6,7 +5,7 @@ import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 class RestaurantRepositoryIml extends RestaurantRepository {
   LocalDataSource localDataSource;
 
-  RestaurantRepositoryIml({@required this.localDataSource});
+  RestaurantRepositoryIml({required this.localDataSource});
 
   @override
   Future<List<RestaurantEntity>> getListRestaurant() async {
@@ -43,7 +42,8 @@ class RestaurantRepositoryIml extends RestaurantRepository {
   }
 
   @override
-  Future<List<RestaurantEntity>> getListRestaurantByName(String restaurantName) async {
+  Future<List<RestaurantEntity>> getListRestaurantByName(
+      String restaurantName) async {
     List<RestaurantEntity> listRestaurant = [];
     List<RestaurantEntity> filterListRestaurant = [];
     var restaurantData = await localDataSource.getRestaurantList();
@@ -74,7 +74,8 @@ class RestaurantRepositoryIml extends RestaurantRepository {
       listRestaurant.add(restaurantEntity);
     });
     filterListRestaurant = listRestaurant
-        .where((food) => food.name.toLowerCase().contains(restaurantName.toLowerCase()))
+        .where((food) =>
+            food.name.toLowerCase().contains(restaurantName.toLowerCase()))
         .toList();
     return filterListRestaurant;
   }

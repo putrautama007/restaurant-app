@@ -18,7 +18,7 @@ class SearchRestaurantLoadedState extends SearchRestaurantState {
   final List<RestaurantEntity> listRestaurant;
 
   SearchRestaurantLoadedState({
-    this.listRestaurant,
+    required this.listRestaurant,
   });
 
   @override

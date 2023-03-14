@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(360, 640),
-      builder: () => MaterialApp(
+      builder: (context , child) => MaterialApp(
         title: 'Restaurant App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

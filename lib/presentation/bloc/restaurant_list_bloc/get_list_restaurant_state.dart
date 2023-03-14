@@ -18,7 +18,7 @@ class GetListRestaurantLoadedState extends GetListRestaurantState {
   final List<RestaurantEntity> listRestaurant;
 
   GetListRestaurantLoadedState({
-    this.listRestaurant,
+   required this.listRestaurant,
   });
 
   @override
