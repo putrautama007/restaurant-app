@@ -9,10 +9,11 @@ class AddReview extends AddReviewEvent {
   final String userName;
   final String review;
 
-  AddReview(
-      {@required this.restaurantId,
-      @required this.userName,
-      @required this.review});
+  AddReview({
+    required this.restaurantId,
+    required this.userName,
+    required this.review,
+  });
 
   @override
   List<Object> get props => [restaurantId, userName, review];

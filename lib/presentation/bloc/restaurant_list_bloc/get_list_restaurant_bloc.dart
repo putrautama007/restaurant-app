@@ -11,21 +11,17 @@ class GetListRestaurantBloc
     extends Bloc<GetListRestaurantEvent, GetListRestaurantState> {
   GetListRestaurantUseCase getListRestaurantUseCase;
 
-  GetListRestaurantBloc({this.getListRestaurantUseCase})
-      : super(GetListRestaurantInitialState());
-
-  @override
-  Stream<GetListRestaurantState> mapEventToState(
-      GetListRestaurantEvent event) async* {
-    if (event is GetListRestaurant) {
-      yield GetListRestaurantLoadingState();
-      var listRestaurant = await getListRestaurantUseCase.getListRestaurant();
+  GetListRestaurantBloc({required this.getListRestaurantUseCase})
+      : super(GetListRestaurantInitialState()) {
+    on<GetListRestaurant>((event, emit) async {
+      emit(GetListRestaurantLoadingState());
+      final listRestaurant = await getListRestaurantUseCase.getListRestaurant();
       if (listRestaurant.error != true) {
-        yield GetListRestaurantLoadedState(
-            listRestaurant: listRestaurant.restaurants);
+        emit(GetListRestaurantLoadedState(
+            listRestaurant: listRestaurant.restaurants));
       } else {
-        yield GetListRestaurantFailedState(message: listRestaurant.message);
+        emit(GetListRestaurantFailedState(message: listRestaurant.message));
       }
-    }
+    });
   }
 }

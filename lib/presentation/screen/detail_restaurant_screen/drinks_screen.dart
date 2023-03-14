@@ -3,7 +3,7 @@ part of 'detail_restaurant_screen.dart';
 class DrinksScreen extends StatelessWidget {
   final List<DrinksEntity> drinks;
 
-  DrinksScreen({this.drinks});
+  DrinksScreen({required this.drinks});
 
   @override
   Widget build(BuildContext context) {

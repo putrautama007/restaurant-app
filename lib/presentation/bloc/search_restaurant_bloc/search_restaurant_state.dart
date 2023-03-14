@@ -17,7 +17,7 @@ class SearchRestaurantLoadingState extends SearchRestaurantState {
 class SearchRestaurantLoadedState extends SearchRestaurantState {
   final List<RestaurantEntity> listRestaurant;
 
-  SearchRestaurantLoadedState({this.listRestaurant});
+  SearchRestaurantLoadedState({required this.listRestaurant});
 
   @override
   List<Object> get props => [listRestaurant];
@@ -26,7 +26,7 @@ class SearchRestaurantLoadedState extends SearchRestaurantState {
 class SearchRestaurantFailedState extends SearchRestaurantState {
   final String message;
 
-  SearchRestaurantFailedState({this.message});
+  SearchRestaurantFailedState({required this.message});
 
   @override
   List<Object> get props => [message];

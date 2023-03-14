@@ -3,7 +3,7 @@ part of 'detail_restaurant_screen.dart';
 class DescriptionScreen extends StatelessWidget {
   final DetailRestaurantEntity restaurantEntity;
 
-  DescriptionScreen({@required this.restaurantEntity});
+  DescriptionScreen({required this.restaurantEntity});
 
   @override
   Widget build(BuildContext context) {

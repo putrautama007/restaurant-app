@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/domain/entity/add_review_entity.dart';
 import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 
@@ -10,7 +9,7 @@ abstract class AddReviewUseCase {
 class AddReviewUseCaseImpl extends AddReviewUseCase {
   RestaurantRepository restaurantRepository;
 
-  AddReviewUseCaseImpl({@required this.restaurantRepository});
+  AddReviewUseCaseImpl({required this.restaurantRepository});
 
   @override
   Future<AddReviewsEntity> addReview(

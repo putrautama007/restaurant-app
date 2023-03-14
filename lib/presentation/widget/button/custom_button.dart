@@ -8,8 +8,8 @@ class CustomButton extends StatelessWidget {
   final double borderRadius;
 
   CustomButton({
-    @required this.text,
-    @required this.onTap,
+    required this.text,
+    required this.onTap,
     this.borderRadius = 0.0,
   });
 

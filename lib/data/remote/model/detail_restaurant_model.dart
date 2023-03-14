@@ -6,9 +6,9 @@ class DetailRestaurantModel extends Equatable {
   final RestaurantData restaurant;
 
   DetailRestaurantModel({
-    this.error,
-    this.message,
-    this.restaurant,
+    required this.error,
+    required this.message,
+    required this.restaurant,
   });
 
   @override
@@ -38,17 +38,18 @@ class RestaurantData extends Equatable {
   final MenusModel menus;
   final List<ConsumerReviewModel> consumerReviews;
 
-  RestaurantData(
-      {this.id,
-      this.name,
-      this.description,
-      this.pictureId,
-      this.city,
-      this.address,
-      this.rating,
-      this.categories,
-      this.menus,
-      this.consumerReviews});
+  RestaurantData({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.pictureId,
+    required this.city,
+    required this.address,
+    required this.rating,
+    required this.categories,
+    required this.menus,
+    required this.consumerReviews,
+  });
 
   @override
   List<Object> get props => [
@@ -76,14 +77,17 @@ class RestaurantData extends Equatable {
             .map((category) => CategoryModel.fromJson(category))),
         menus: MenusModel.fromJson(json['menus']),
         consumerReviews: List<ConsumerReviewModel>.from(json['customerReviews']
-            .map((consumerReview) => ConsumerReviewModel.fromJson(consumerReview))),
+            .map((consumerReview) =>
+                ConsumerReviewModel.fromJson(consumerReview))),
       );
 }
 
 class CategoryModel extends Equatable {
   final String name;
 
-  CategoryModel({this.name});
+  CategoryModel({
+    required this.name,
+  });
 
   @override
   List<Object> get props => [name];
@@ -96,7 +100,10 @@ class MenusModel extends Equatable {
   final List<FoodsModel> foods;
   final List<DrinksModel> drinks;
 
-  MenusModel({this.foods, this.drinks});
+  MenusModel({
+    required this.foods,
+    required this.drinks,
+  });
 
   @override
   List<Object> get props => [foods, drinks];
@@ -112,7 +119,9 @@ class MenusModel extends Equatable {
 class FoodsModel extends Equatable {
   final String name;
 
-  FoodsModel({this.name});
+  FoodsModel({
+    required this.name,
+  });
 
   @override
   List<Object> get props => [name];
@@ -124,7 +133,9 @@ class FoodsModel extends Equatable {
 class DrinksModel extends Equatable {
   final String name;
 
-  DrinksModel({this.name});
+  DrinksModel({
+    required this.name,
+  });
 
   @override
   List<Object> get props => [name];
@@ -138,12 +149,17 @@ class ConsumerReviewModel extends Equatable {
   final String review;
   final String date;
 
-  ConsumerReviewModel({this.name, this.review, this.date});
+  ConsumerReviewModel({
+    required this.name,
+    required this.review,
+    required this.date,
+  });
 
   @override
   List<Object> get props => [name, review, date];
 
-  factory ConsumerReviewModel.fromJson(Map<String, dynamic> json) => ConsumerReviewModel(
+  factory ConsumerReviewModel.fromJson(Map<String, dynamic> json) =>
+      ConsumerReviewModel(
         name: json['name'],
         review: json['review'],
         date: json['date'],

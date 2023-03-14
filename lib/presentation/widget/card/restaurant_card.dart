@@ -8,7 +8,7 @@ class RestaurantCard extends StatelessWidget {
   final RestaurantEntity restaurantEntity;
   final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
 
-  RestaurantCard({@required this.restaurantEntity});
+  RestaurantCard({required this.restaurantEntity});
 
   @override
   Widget build(BuildContext context) {

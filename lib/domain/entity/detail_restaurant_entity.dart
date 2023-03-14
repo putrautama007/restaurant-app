@@ -14,19 +14,20 @@ class DetailRestaurantEntity extends Equatable {
   final MenusEntity menus;
   final List<ConsumerReviewEntity> consumerReviews;
 
-  DetailRestaurantEntity(
-      {this.error,
-      this.message,
-      this.id,
-      this.name,
-      this.description,
-      this.pictureId,
-      this.city,
-      this.address,
-      this.rating,
-      this.categories,
-      this.menus,
-      this.consumerReviews});
+  DetailRestaurantEntity({
+    required this.error,
+    required this.message,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.pictureId,
+    required this.city,
+    required this.address,
+    required this.rating,
+    required this.categories,
+    required this.menus,
+    required this.consumerReviews,
+  });
 
   @override
   List<Object> get props => [
@@ -48,7 +49,9 @@ class DetailRestaurantEntity extends Equatable {
 class CategoryEntity extends Equatable {
   final String name;
 
-  CategoryEntity({this.name});
+  CategoryEntity({
+    required this.name,
+  });
 
   @override
   List<Object> get props => [name];
@@ -58,7 +61,10 @@ class MenusEntity extends Equatable {
   final List<FoodsEntity> foods;
   final List<DrinksEntity> drinks;
 
-  MenusEntity({this.foods, this.drinks});
+  MenusEntity({
+    required this.foods,
+    required this.drinks,
+  });
 
   @override
   List<Object> get props => [foods, drinks];
@@ -67,7 +73,9 @@ class MenusEntity extends Equatable {
 class FoodsEntity extends Equatable {
   final String name;
 
-  FoodsEntity({this.name});
+  FoodsEntity({
+    required this.name,
+  });
 
   @override
   List<Object> get props => [name];
@@ -76,7 +84,9 @@ class FoodsEntity extends Equatable {
 class DrinksEntity extends Equatable {
   final String name;
 
-  DrinksEntity({this.name});
+  DrinksEntity({
+    required this.name,
+  });
 
   @override
   List<Object> get props => [name];
@@ -87,8 +97,16 @@ class ConsumerReviewEntity extends Equatable {
   final String review;
   final String date;
 
-  ConsumerReviewEntity({this.name, this.review, this.date});
+  ConsumerReviewEntity({
+    required this.name,
+    required this.review,
+    required this.date,
+  });
 
   @override
-  List<Object> get props => [name, review, date];
+  List<Object> get props => [
+        name,
+        review,
+        date,
+      ];
 }

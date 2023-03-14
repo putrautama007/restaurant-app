@@ -8,8 +8,8 @@ class CustomErrorWidget extends StatelessWidget {
   final String errorImage;
 
   CustomErrorWidget({
-    @required this.errorMessage,
-    @required this.errorImage,
+    required this.errorMessage,
+    required this.errorImage,
   });
 
   @override

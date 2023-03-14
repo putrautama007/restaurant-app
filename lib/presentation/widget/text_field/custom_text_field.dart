@@ -6,14 +6,14 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputType keyboardType;
-  final int maxLines;
-  final ValueChanged<String> onFieldSubmitted;
-  final FocusNode focusNode;
+  final int? maxLines;
+  final ValueChanged<String>? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   CustomTextField({
-    @required this.controller,
-    @required this.hint,
-    @required this.keyboardType,
+    required this.controller,
+    required this.hint,
+    required this.keyboardType,
     this.maxLines = 1,
     this.onFieldSubmitted,
     this.focusNode,

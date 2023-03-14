@@ -18,7 +18,7 @@ abstract class RemoteDataSource {
 class RemoteDataSourceImpl extends RemoteDataSource {
   Dio dio;
 
-  RemoteDataSourceImpl({this.dio});
+  RemoteDataSourceImpl({required this.dio});
 
   @override
   Future<RestaurantListModel> getRestaurantList() async {
@@ -26,7 +26,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       Response _response = await dio.get(ApiConstant.listRestaurant);
       return RestaurantListModel.fromJson(_response.data);
     } on DioError catch (e) {
-      return RestaurantListModel.fromJson(e.response.data);
+      return RestaurantListModel.fromJson(e.response!.data);
     }
   }
 
@@ -37,7 +37,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
           await dio.get("${ApiConstant.searchRestaurant}$restaurantName");
       return RestaurantListModel.fromJson(_response.data);
     } on DioError catch (e) {
-      return RestaurantListModel.fromJson(e.response.data);
+      return RestaurantListModel.fromJson(e.response!.data);
     }
   }
 
@@ -48,7 +48,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
           await dio.get("${ApiConstant.detailRestaurant}$restaurantId");
       return DetailRestaurantModel.fromJson(_response.data);
     } on DioError catch (e) {
-      return DetailRestaurantModel.fromJson(e.response.data);
+      return DetailRestaurantModel.fromJson(e.response!.data);
     }
   }
 
@@ -67,7 +67,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
           ));
       return AddReviewsModel.fromJson(_response.data);
     } on DioError catch (e) {
-      return AddReviewsModel.fromJson(e.response.data);
+      return AddReviewsModel.fromJson(e.response!.data);
     }
   }
 }

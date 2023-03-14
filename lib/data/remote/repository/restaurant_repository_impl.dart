@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:restaurant_app/data/remote/datasource/api_constant.dart';
 import 'package:restaurant_app/data/remote/datasource/remote_data_source.dart';
 import 'package:restaurant_app/domain/entity/add_review_entity.dart';
@@ -9,7 +8,7 @@ import 'package:restaurant_app/domain/repository/restaurant_repository.dart';
 class RestaurantRepositoryIml extends RestaurantRepository {
   RemoteDataSource remoteDataSource;
 
-  RestaurantRepositoryIml({@required this.remoteDataSource});
+  RestaurantRepositoryIml({required this.remoteDataSource});
 
   @override
   Future<RestaurantListEntity> getListRestaurant() async {

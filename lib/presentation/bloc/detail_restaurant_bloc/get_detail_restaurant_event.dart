@@ -7,7 +7,7 @@ abstract class GetDetailRestaurantEvent extends Equatable {
 class GetDetailRestaurant extends GetDetailRestaurantEvent {
   final String restaurantId;
 
-  GetDetailRestaurant({@required this.restaurantId});
+  GetDetailRestaurant({required this.restaurantId});
 
   @override
   List<Object> get props => [restaurantId];

@@ -5,7 +5,7 @@ class ReviewsScreen extends StatelessWidget {
   final String restaurantId;
   final RestaurantListRouter _restaurantListRouter = RestaurantListRouterImpl();
 
-  ReviewsScreen({this.consumerReviews, this.restaurantId});
+  ReviewsScreen({required this.consumerReviews,required this.restaurantId});
 
   @override
   Widget build(BuildContext context) {

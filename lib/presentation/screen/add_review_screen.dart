@@ -17,7 +17,7 @@ class AddReviewScreen extends StatelessWidget {
   final TextEditingController _reviewController = TextEditingController();
   final FocusNode _reviewFocusNode = FocusNode();
 
-  AddReviewScreen({@required this.restaurantId});
+  AddReviewScreen({required this.restaurantId});
 
   @override
   Widget build(BuildContext context) {

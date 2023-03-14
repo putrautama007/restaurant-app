@@ -28,10 +28,11 @@ class DetailRestaurantScreen extends StatefulWidget {
   final String restaurantName;
   final String restaurantImage;
 
-  DetailRestaurantScreen(
-      {@required this.restaurantId,
-      @required this.restaurantName,
-      @required this.restaurantImage});
+  DetailRestaurantScreen({
+    required this.restaurantId,
+    required this.restaurantName,
+    required this.restaurantImage,
+  });
 
   @override
   _DetailRestaurantScreenState createState() => _DetailRestaurantScreenState();
